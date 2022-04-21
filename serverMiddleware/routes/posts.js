@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 // middleware pour proteger la route
-const auth = require('../middleware/auth');
+const authent = require('../middleware/auth');
 //middleware pour l'image
 //const multer = require('../middleware/multer-config');
 //middleware pour verifier input du formulaire
@@ -18,11 +18,11 @@ const postCtrl = require ('../controllers/post');
 // Route Affichage de toutes les posts
 router.get('/', postCtrl.getAllPost);
 // Route Creation d'un post
-router.post('/',postCtrl.createPost);
+router.post('/', authent, postCtrl.createPost);
 // Route Affichage d'un post
-router.get('/:id', postCtrl.getOnePost);
+router.get('/:id', authent, postCtrl.getOnePost);
 // Route Modification d'un post
-router.put('/:id', postCtrl.modifyPost);
+router.put('/:id', authent, postCtrl.modifyPost);
 // Route Supression d'un post
-router.delete('/:id', postCtrl.deletePost);
+router.delete('/:id', authent, postCtrl.deletePost);
 module.exports = router;

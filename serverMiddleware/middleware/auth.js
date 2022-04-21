@@ -1,27 +1,23 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.secretToken);
     // verify transforme en donnée js basique
-    const userId = decodedToken.id;
-    console.log("auth" + userId);
-    console.log("auth" + req.body.userid)
+    const userId = decodedToken.id*1;
     // userId raccourci JS de userId: userId
     req.auth = {userId};
     
-    console.log(req.body.title + req.body.content + req.body.userid)
     // VERIFICATION USER ID BODY correspond à user id
-    if (req.body.userid && req.body.userid !== userId) {
+    if (req.body.userid && req.body.userid*1 !== userId) {
       throw 'Invalid user ID';
     } else {
-      next();
+      return next();
     }
   } catch {
     res.status(403).json({
-      error: new Error('Invalid request!')
+      error: 'Invalid request!'
     });
   }
 };
