@@ -9,6 +9,9 @@
 
 <script>
 export default {
- 
+  middleware: 'auth',
+  async asyncData(context){
+    await context.$auth.logout()
+  },
 }
 </script>

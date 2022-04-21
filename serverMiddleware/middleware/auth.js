@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.secretToken);
     // verify transforme en donnée js basique
-    const userId = decodedToken.userId;
+    const userId = decodedToken.id;
     console.log("auth" + userId);
     console.log("auth" + req.body.userid)
     // userId raccourci JS de userId: userId

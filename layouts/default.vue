@@ -11,10 +11,10 @@
             <div>
                 <nuxt-link   class='app-navbar' to="/">Home</nuxt-link>
             </div>
-            <div>
+            <div v-if="$auth.loggedIn">
                 <nuxt-link  class='app-navbar' to="/logout" >Logout</nuxt-link>
             </div>
-            <div>
+            <div  v-if="!$auth.loggedIn">
                 <nuxt-link   class='app-navbar' to="/login">Login</nuxt-link>
                 <nuxt-link   class='app-navbar' to="/signup">Sign Up</nuxt-link>
             </div>
@@ -25,4 +25,5 @@
 </template>
 
 <script>
+
 </script>

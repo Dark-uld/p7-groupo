@@ -45,21 +45,50 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+  auth: {
+    strategies: {
+        local: {
+            endpoints: {
+                // these are the API endpoints we created in Express
+                login: {
+                    url: '/auth/login',
+                    method: 'post',
+                    propertyName: 'token'
+                },
+                logout: true,
+                user: {
+                     url: '/auth/user',
+                    method: 'get',
+                    propertyName: 'user'
+                }
+            },
+            token: {
+                required: true,
+                type: "Bearer"
+            },
+        }
+    },
+    redirect: {
+          login: '/login', // User will be redirected to this path if login is required
+          logout: '/', // User will be redirected to this path if after logout, current route is protectednpm
+          home: '/' // User will be redirect to this path after login if accessed login page directly
+    },
+    rewriteRedirects: true
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/api',
+    //baseURL: '/api',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  serverMiddleware:[{
-    path: 'api',
-    handler: '~/serverMiddleware/index.js'
-  }],
+  serverMiddleware:['~/serverMiddleware/index.js'
+  ],
   router: {
     prefetchLinks: false
   },
