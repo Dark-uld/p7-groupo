@@ -7,16 +7,16 @@
         <div class="app-search">
             
         </div>
-        <div class='app-navbar'>
+        <div class='app-flex-row'>
             <div>
-                <nuxt-link   class='app-navbar-item' to="/">Home</nuxt-link>
+                <nuxt-link   class='app-navbar' to="/">Home</nuxt-link>
             </div>
             <div>
-                <nuxt-link  class='app-navbar-item' to="/logout" >Logout</nuxt-link>
+                <nuxt-link  class='app-navbar' to="/logout" >Logout</nuxt-link>
             </div>
             <div>
-                <nuxt-link   class='app-navbar-item' to="/login">Login</nuxt-link>
-                <nuxt-link   class='app-navbar-item' to="/signup">Sign Up</nuxt-link>
+                <nuxt-link   class='app-navbar' to="/login">Login</nuxt-link>
+                <nuxt-link   class='app-navbar' to="/signup">Sign Up</nuxt-link>
             </div>
         </div>
     </header>

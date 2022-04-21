@@ -13,6 +13,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'redprim': '#EF4444',
+        'redsec': '#FF9292',
+        'redter': '#350D0D'
+
         
       },
       fontFamily: {
@@ -34,6 +38,7 @@ module.exports = {
       spacing: {
         px: '1px',
         0: '0',
+        300:'1200px'
       },
       screens: {
         sm: '640px',

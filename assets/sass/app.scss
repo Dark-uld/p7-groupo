@@ -5,7 +5,26 @@ html, body {
 }
 
 .app {
+    // display flex
+    &-flex {
+        &-row{
+            @apply flex flex-row ;
+        }
     
+        &-col{
+            @apply flex flex-col ; 
+        }
+    }
+
+    // centrer les objets
+    &-center {
+        @apply justify-center items-center ; 
+    }
+
+    &-jaic{
+        @apply justify-around items-center ;
+    }
+
     &-header {
         @apply px-8 py-5 w-screen flex flex-row items-center bg-red-500 justify-between ;
     }
@@ -19,7 +38,7 @@ html, body {
     }
 
     &-title {
-        @apply px-5 py-4 text-3xl font-bold text-red-500 ;
+        @apply px-5 py-6 text-3xl font-bold ;
     }
 
     &-rounded{
@@ -27,11 +46,7 @@ html, body {
     }
 
     &-navbar {
-        @apply flex flex-row ; 
-
-        &-item {
-        @apply px-0.5 ;  
-        }
+        @apply px-0.5
     }
     
     
@@ -80,4 +95,28 @@ html, body {
         }
         
     }
+
+
+    // page index
+    &-main {
+       @apply  w-full min-h-full ;
+
+       &-box{
+           // max width de 1280px
+           @apply max-w-7xl ;
+       }
+       &-menu{
+          height: 100px;
+       }
+
+       &-btn{
+           padding: 10px;
+           border: 1px solid #ef4444;
+           text-align: center;
+           font-weight: 600;
+           border-radius: 15px;
+           width: 250px;
+       }
+    }
 }
+
