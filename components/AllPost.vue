@@ -4,13 +4,13 @@
         <div>
             <nuxt-link to="posts/newpost">Créer un nouveau post</nuxt-link>
         </div>
-        <div class="app-post" v-for="post in posts">
+        <nuxt-link class="app-post" v-for="(post,index) in posts" :to="`/posts/${post.id}`" :key="index">
             <div class="app-post-bord">
                 <img src="/images/LogoS/icon-above-font.png" class="app-post-logo app-rounded"/>
             </div>
             <div class="app-post-container">
                 <div class="app-post-head">
-                    <div class="app-post-name">{{post.userid}} </div> 
+                    <div class="app-post-name">{{post.User.name}} </div> 
                     <div class="app-post-date">{{newDate(post.createdAt)}}</div>
                 </div>
                 <div>{{post.title}}</div>
@@ -22,7 +22,7 @@
                     <button>like</button>
                 </div>
             </div>
-        </div>
+        </nuxt-link>
     </div>
         
 </template>

@@ -2,6 +2,7 @@
 const Sequelize  = require('sequelize');
 const sequelize = require('../utils/database');
 
+
 const User = sequelize.define('User', {
      // Model attributes are defined here
   id: {
@@ -29,6 +30,7 @@ const User = sequelize.define('User', {
     type: Sequelize.BOOLEAN,
   }
 });
+
 
 
 

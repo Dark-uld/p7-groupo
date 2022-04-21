@@ -31,7 +31,7 @@ const Post = sequelize.define('Post', {
   
 });
 
-Post.associate = (User)=>{
+/* Post.associate = (User)=>{
     Post.belongsTo(User, {
         foreignKey: {
             allowNull: false,
@@ -39,7 +39,9 @@ Post.associate = (User)=>{
         }
     })
     
-};
+};*/
 
+User.hasMany(Post)
+Post.belongsTo(User)
 
 module.exports = Post;

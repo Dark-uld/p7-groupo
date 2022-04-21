@@ -1,4 +1,5 @@
 const Post = require ('../models/Post');
+const User = require ('../models/User');
 
 exports.createPost = (req, res, next) => {
   const post = Post.create({
@@ -13,7 +14,13 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPost = (req, res, next ) => {
-    Post.findAll()
+    Post.findAll({ 
+      include: [{
+        model: User,
+        required: true,
+        attributes:['name']
+       }]
+    })
     .then(
       (posts) => {
         res.status(200).json(posts);
