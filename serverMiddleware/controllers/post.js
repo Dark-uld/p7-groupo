@@ -9,8 +9,7 @@ exports.createPost = (req, res, next) => {
     })
     return post
     .then(() => res.status(201).json({ message: 'Post créé !' }))
-    .catch(error => res.status(400).json({  message: 'Blem!' }));
-       
+    .catch(error => res.status(400).json({  message: 'Problème rencontré lors de la création du post' }));
 };
 
 exports.getAllPost = (req, res, next ) => {
@@ -19,7 +18,8 @@ exports.getAllPost = (req, res, next ) => {
         model: User,
         required: true,
         attributes:['name']
-       }]
+       }],
+       order: [ [ 'createdAt', 'DESC' ]]
     })
     .then(
       (posts) => {
@@ -37,7 +37,13 @@ exports.getAllPost = (req, res, next ) => {
 exports.getOnePost = (req, res, next) => {
     Post.findAll({where: {
         id: req.params.id
-    }}).then( 
+    },
+    include: [{
+      model: User,
+      required: true,
+      attributes:['name']
+     }]
+  }).then( 
       (post) => {
         res.status(200).json(post);
       }

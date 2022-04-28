@@ -3,7 +3,7 @@ const sequelize = require('../utils/database');
 const User = require ('../models/User');
 const Post = require ('../models/Post');
 
-const Coment = sequelize.define('Coment', {
+const Comment = sequelize.define('Comment', {
      // Model attributes are defined here
     id: {
         type: Sequelize.INTEGER,
@@ -36,21 +36,10 @@ const Coment = sequelize.define('Coment', {
   
 });
 
-Coment.associate = (User, Post)=>{
-    Coment.belongsTo(User, {
-        foreignKey: {
-            allowNull: false,
-            name:'id'
-        }
-    }),
-    Coment.belongsTo(Post, {
-        foreignKey: {
-            allowNull: false,
-            name:'id'
-        }
-    })
-    
-};
+User.hasMany(Comment)
+Post.hasMany(Comment)
+Comment.belongsTo(User)
+Comment.belongsTo(User)
 
 
-module.exports = Coment;
+module.exports = Comment;

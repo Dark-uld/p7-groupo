@@ -16,7 +16,6 @@
                 <div>{{post.title}}</div>
                 <div>
                     {{post.content}}
-                    <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
                 </div>
                 <div>
                     <button>Comment</button>
