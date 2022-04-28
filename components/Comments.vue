@@ -1,28 +1,21 @@
 <template>
     <div>
-        <h1> Liste des posts</h1>
-        <div>
-            <nuxt-link to="posts/newpost">Créer un nouveau post</nuxt-link>
-        </div>
-        <nuxt-link class="app-post" v-for="(post,index) in posts" :to="`/posts/${post.id}`" :key="index">
-            <div class="app-post-bord">
-                <img src="/images/LogoS/icon-above-font.png" class="app-post-logo app-rounded"/>
-            </div>
+        <div class="app-post" v-for="comment in comments">
             <div class="app-post-container">
                 <div class="app-post-head">
-                    <div class="app-post-name">{{post.User.name}} </div> 
-                    <div class="app-post-date">{{newDate(post.createdAt)}}</div>
-                </div>
-                <div>{{post.title}}</div>
-                <div>
-                    {{post.content}}
+                    <div class="app-post-name">{{comment.User.name}} </div> 
+                    <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
                 </div>
                 <div>
-                    <button>Comment</button>
-                    <button>like</button>
+                    {{comment.content}}
+                    <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`"> Modifié le {{newDate(comment.updatedAt)}}</div>
+                </div>
+                <div v-if="`${comment.userid}`==`${$auth.user.id}`">
+                    <button>Modifier</button>
+                    <button>Supprimer</button>
                 </div>
             </div>
-        </nuxt-link>
+        </div>
     </div>
         
 </template>
@@ -30,11 +23,12 @@
 <script>
 import newDate from '~/utils/newDate'
 export default {
+    middleware:'auth',
   methods: {
       newDate,
   },
     props:{
-    posts: {
+    comments: {
       type: Array,
       default: []
     }

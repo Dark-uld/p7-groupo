@@ -18,7 +18,10 @@
                 <button @click="deleteRecord()">Delete</button>
             </div>
             <div>
-                <button>Comment</button>
+                <div v-if="`${comments.length}`<1">No Comment</div>
+                <div v-else>
+                    <Comments :comments="comments"/>
+                </div>
                 <button>like</button>
             </div>
         </div>
@@ -33,13 +36,21 @@ export default {
         title: this.post[0].title,
         meta: [{
             name: 'description',
-            content: "Voici la page d'accueil",
+            content: `Ce post a été créé par ${this.post[0].User.name}`,
             hid: 'description'
         }]
     }
   },
   
   middleware: 'auth',
+  data(){
+    return{
+      errors:null,
+      content:null,
+      userid:null,
+      postid:null,
+    }
+  },
   methods: {
       newDate,
       deleteRecord(){
@@ -56,11 +67,21 @@ export default {
     }
   },
   async asyncData(context){
-
-      const {data} = await context.$axios.get('/posts/'+context.route.params.id)
-      return {
-      post : data
-      }
+    const [postRes, comRes] = await Promise.all([
+        
+        context.$axios.get('/posts/'+ context.route.params.id),
+        context.$axios.get('/comments', {
+            data: {
+                postid: context.route.params.id
+            }
+        })
+        
+    ])
+    console.log(context.route.params.id)
+    return {
+        post : postRes.data,
+        comments: comRes.data
+    }
     }
 }
 </script>
