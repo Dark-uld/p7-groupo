@@ -19,19 +19,9 @@ const Comment = sequelize.define('Comment', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    title: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     content: {
         type: Sequelize.TEXT,
         allowNull: false
-    },
-    image: {
-        type: Sequelize.TEXT,
-    },
-    image_desc: {
-        type: Sequelize.TEXT,
     }
   
 });

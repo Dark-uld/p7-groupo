@@ -28,7 +28,7 @@ export default {
                 hid: 'description'
             }]
         }
-    },
+  },
   
   async asyncData(context){
       const {data} = await context.$axios.get('/posts')

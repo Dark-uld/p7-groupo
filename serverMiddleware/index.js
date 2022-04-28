@@ -3,6 +3,7 @@ const express = require('express');
 // iMPORTE ROUTES
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/posts');
+const commentRoutes = require('./routes/comments');
 const path = require('path');
 
 
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 // ENREGISTRE ROUTER POUR TOUTE DEMANDE API 
 app.use('/auth', userRoutes);
 app.use("/posts", postRoutes);
+app.use('/comments', commentRoutes);
 // app.use('/images', express.static(path.join(__dirname, 'images')));
 
 

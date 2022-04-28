@@ -28,6 +28,17 @@
 <script>
 import newDate from '~/utils/newDate'
 export default {
+  head(){
+    return {
+        title: this.post[0].title,
+        meta: [{
+            name: 'description',
+            content: "Voici la page d'accueil",
+            hid: 'description'
+        }]
+    }
+  },
+  
   middleware: 'auth',
   methods: {
       newDate,

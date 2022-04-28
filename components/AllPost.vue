@@ -20,7 +20,8 @@
                 </div>
                 <div>
                     <button>Comment</button>
-                    <button>like</button>
+                    <button  @click="showAth()">like</button>
+
                 </div>
             </div>
         </nuxt-link>
@@ -33,6 +34,9 @@ import newDate from '~/utils/newDate'
 export default {
   methods: {
       newDate,
+      showAth(){
+          console.log($auth.user)
+      }
   },
     props:{
     posts: {
