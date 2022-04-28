@@ -6,7 +6,11 @@
       <nuxt-link class="app-main-btn text-redter bg-redsec" to='/signup'>Créer un nouveau compte</nuxt-link>
       <nuxt-link class="app-main-btn text-redter bg-redsec" to='/login'>Se connecter</nuxt-link>
     </div>
-    <div v-if="$auth.loggedIn"><AllPost :posts="posts"/></div>
+    <div v-if="$auth.loggedIn">
+      <div v-if="$route.params.created=='yes'">Post créé !</div>
+      <div v-if="$route.params.deleted=='yes'">Post supprimé !</div>
+      <AllPost :posts="posts"/>
+      </div>
      
   </div>
 </div>

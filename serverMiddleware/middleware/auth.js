@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.id*1;
     // userId raccourci JS de userId: userId
     req.auth = {userId};
+    console.log(req.auth);
     
     // VERIFICATION USER ID BODY correspond à user id
     if (req.body.userid && req.body.userid*1 !== userId) {

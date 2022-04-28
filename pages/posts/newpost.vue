@@ -61,9 +61,8 @@ export default {
         })
         .then((response) => {
           console.log(response)
-          if(response.data._id){
-            this.$router.push({ name:'posts', params:{ created:'yes' } })
-          }
+          this.$router.push({ name:'index', params:{ created:'yes' } })
+          
         })
         .catch( (error) => {
           console.log(error)

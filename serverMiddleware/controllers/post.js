@@ -8,7 +8,7 @@ exports.createPost = (req, res, next) => {
       userid: req.body.userid
     })
     return post
-    .then(() => res.status(201).json({ message: 'Post créé !' }))
+    .then((post) => res.status(201).json({ message: 'Post créé !', id: post._id }))
     .catch(error => res.status(400).json({  message: 'Problème rencontré lors de la création du post' }));
 };
 
@@ -83,11 +83,13 @@ exports.deletePost = (req, res, next) => {
     .then(
         (post) => {
           // Si pas une sauce existance
+          console.log("au"+req.auth.userId+"id"+post[0].userid);
+
           if (!post) {
             res.status(404).json({
               error: new Error('No such Post!')
             });
-          } else if (post.userid !== req.auth.userId) { // si id créateur sauce n'est pas id utilisateur
+          } else if (post[0].userid !== req.auth.userId) { // si id créateur sauce n'est pas id utilisateur
             res.status(400).json({
               error: new Error('Unauthorized request!')
             });
@@ -105,7 +107,7 @@ exports.deletePost = (req, res, next) => {
             ).catch(
               (error) => {
                 res.status(400).json({
-                  error: error
+                  error: new Error('Problème lors de la suppression!')
                 });
               }
             );
@@ -113,5 +115,5 @@ exports.deletePost = (req, res, next) => {
           
         }
       )
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ error: new Error('Problème lors de la suppression!') }));
 }

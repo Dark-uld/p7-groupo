@@ -13,8 +13,9 @@
                 {{post[0].content}}
                 <div v-if="`${post[0].createdAt}` != `${post[0].updatedAt}`"> Modifié le {{newDate(post[0].updatedAt)}}</div>
             </div>
-            <div>
-                <nuxt-link v-if="`${post[0].userid}`==`${$auth.user.id}`" :to="`/posts/${post[0].id}/modifypost`">Modifier</nuxt-link>
+            <div v-if="`${post[0].userid}`==`${$auth.user.id}`">
+                <nuxt-link  :to="`/posts/${post[0].id}/modifypost`">Modifier</nuxt-link>
+                <button @click="deleteRecord()">Delete</button>
             </div>
             <div>
                 <button>Comment</button>
@@ -30,6 +31,18 @@ export default {
   middleware: 'auth',
   methods: {
       newDate,
+      deleteRecord(){
+      if(confirm("Êtes-vous sure?") === true){
+        this.$axios.delete('/posts/' + this.$route.params.id)
+          .then((response) => {
+              this.$router.push({ name:'index', params:{ deleted:'yes' } })
+            
+          })
+          .catch( (error) => {
+            console.log(error);
+          });
+      }
+    }
   },
   async asyncData(context){
 
