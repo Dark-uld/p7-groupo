@@ -9,8 +9,15 @@
     <div v-if="$auth.loggedIn">
       <div v-if="$route.params.created=='yes'">Post créé !</div>
       <div v-if="$route.params.deleted=='yes'">Post supprimé !</div>
-      <AllPost :posts="posts"/>
+      <h1> Liste des posts</h1>
+      <div>
+          <nuxt-link to="posts/newpost">Créer un nouveau post</nuxt-link>
+          <button @click="userState()">User</button>
       </div>
+      <div>
+        <Posts :posts="posts"/>
+      </div>
+    </div>
      
   </div>
 </div>
@@ -29,7 +36,11 @@ export default {
             }]
         }
   },
-  
+  methods:{
+      userState(){
+        console.log(this.$auth.user);
+      }
+  },
   async asyncData(context){
       const {data} = await context.$axios.get('/posts')
       return {

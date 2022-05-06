@@ -77,7 +77,6 @@ export default {
         })
         
     ])
-    console.log(context.route.params.id)
     return {
         post : postRes.data,
         comments: comRes.data

@@ -32,6 +32,6 @@ export default {
       type: Array,
       default: []
     }
-  }
+  },
 }
 </script>
