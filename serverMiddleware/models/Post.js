@@ -22,10 +22,10 @@ const Post = sequelize.define('Post', {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    image: {
-        type: Sequelize.TEXT,
+    likes: {
+        type: Sequelize.INTEGER,
     },
-    image_desc: {
+    userLiked: {
         type: Sequelize.TEXT,
     }
   

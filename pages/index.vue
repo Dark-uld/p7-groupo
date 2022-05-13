@@ -38,7 +38,7 @@ export default {
   },
   methods:{
       userState(){
-        console.log(this.$auth.user);
+        console.log(this.$auth.hasScope('isAdmin'));
       }
   },
   async asyncData(context){
@@ -47,5 +47,6 @@ export default {
       posts : data
       }
   },
+  
 }
 </script>

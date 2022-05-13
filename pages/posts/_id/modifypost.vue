@@ -16,16 +16,6 @@
             <input type="text" v-model="content">
           </div>
 
-          <div >
-            <label for="">Image/gif</label>
-            <input type="text" v-model="image">
-            
-          </div>
-          <div >
-            <label for="">Description de l'image</label>
-            <input type="text" v-model="image_desc">
-          </div>
-
           <input type="submit" value="Mise à Jour">
           <nuxt-link to="/" >Cancel</nuxt-link>
 
@@ -51,8 +41,6 @@ export default {
       errors:null,
       title:null,
       content:null,
-      image:null,
-      image_desc:null,
       userid:null,
     }
   },
@@ -65,16 +53,12 @@ export default {
       this.title = this.post.title
       this.userid = this.post.userid
       this.content = this.post.content
-      this.image = this.post.image
-      this.image_desc = this.post.image_desc
 
     },
     submitForm(){
       this.$axios.put( '/posts/' + this.$route.params.id, {
           title: this.title,
           content: this.content,
-          image: this.image,
-          image_desc: this.image_desc,
           userid:this.$auth.user.id
         })
         .then((response) => {

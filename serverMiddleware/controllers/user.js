@@ -64,6 +64,10 @@ exports.user = function(req, res) {
         return res.status(401).json({message: 'unauthorized'})
       } else {
         return res.json({ user: decoded })
+        /*User.findAll({where: {
+        id: decoded.id
+        }})
+        .then( (user) => {res.status(200).json(user);} )*/
       }
     });
   }

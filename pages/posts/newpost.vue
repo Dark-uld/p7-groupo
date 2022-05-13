@@ -16,16 +16,6 @@
             <input type="text" v-model="content">
           </div>
 
-          <div >
-            <label for="">Image/gif</label>
-            <input type="text" v-model="image">
-            
-          </div>
-          <div >
-            <label for="">Description de l'image</label>
-            <input type="text" v-model="image_desc">
-          </div>
-
           <input type="submit" value="Register">
           <nuxt-link to="/" >Cancel</nuxt-link>
 
@@ -45,8 +35,6 @@ export default {
       errors:null,
       title:null,
       content:null,
-      image:null,
-      image_desc:null,
       userid:null,
     }
   },
@@ -55,8 +43,6 @@ export default {
       this.$axios.post( '/posts', {
           title: this.title,
           content: this.content,
-          image: this.image,
-          image_desc: this.image_desc,
           userid:this.$auth.user.id
         })
         .then((response) => {

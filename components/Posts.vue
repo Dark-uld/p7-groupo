@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nuxt-link class="app-post" v-for="(post,index) in posts" :to="`/posts/${post.id}`" :key="index">
+        <div class="app-post" v-for="(post,index) in posts"  :key="index">
             <div class="app-post-container">
                 <div class="app-post-head">
                     <div class="app-post-name">{{post.User.name}} </div> 
@@ -17,7 +17,8 @@
                     <button  @click="showAth()">like</button>
                 </div>
             </div>
-        </nuxt-link>
+            <nuxt-link :to="`/posts/${post.id}`">Voir plus</nuxt-link>
+        </div>
     </div>
         
 </template>

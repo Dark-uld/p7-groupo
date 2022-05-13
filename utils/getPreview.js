@@ -17,17 +17,18 @@ export default (content, contentId) => {
 
     function addElement(data){
         const previewConteneur = `
-        
+        <a href="${data.url}">
         <article class="article-content app-center">
         <div class="article-img-container">
-        <img src="${data.image}" alt "preview de l'article" class="article-img"/>
+        <img src="${data.image}" alt="preview de l'article" class="article-img"/>
         </div>
         <div>
             <h3 class="article-title">${data.title}</h3>
             <div class="article-desc">${data.description}</div>
         </div>
-        <a href="${data.url}">Voir plus</a>
+        
         </article>
+        </a>
         `;
 
         const preview = document.getElementById(contentId);

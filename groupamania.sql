@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`posts` (
 	`userid` INT(11) UNSIGNED NULL DEFAULT NULL,
 	`title` VARCHAR(250) NOT NULL COLLATE 'utf8mb3_general_ci',
 	`content` TEXT NOT NULL COLLATE 'utf8mb3_general_ci',
-	`image` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
-	`image_desc` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`likes` INT(11) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`userLiked` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
 	`createdAt` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
 	`updatedAt` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 	PRIMARY KEY (`id`) USING BTREE,
@@ -41,6 +41,6 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`comments` (
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `FK__users` (`userid`) USING BTREE,
 	INDEX `FK__posts` (`postid`) USING BTREE,
-	CONSTRAINT `FK__posts` FOREIGN KEY (`postid`) REFERENCES `groupomania`.`posts` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+	CONSTRAINT `FK__posts` FOREIGN KEY (`postid`) REFERENCES `groupomania`.`posts` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
 	CONSTRAINT `FK__users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
 );

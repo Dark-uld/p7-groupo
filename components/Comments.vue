@@ -7,12 +7,23 @@
                     <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
                 </div>
                 <div>
+                
                     {{comment.content}}
                     <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`"> Modifié le {{newDate(comment.updatedAt)}}</div>
                 </div>
                 <div v-if="`${comment.userid}`==`${$auth.user.id}`">
-                    <button>Modifier</button>
-                    <button>Supprimer</button>
+                    <button v-on:click="isHidden = !isHidden">Modifier</button>
+                    <form :id="`${comment.id}`" action=""
+                    method="put"
+                    @submit.prevent="modifyComment()"
+                    v-if="!isHidden">
+                        <div>
+                            <label for="comContent">Modifier le commentaire</label>
+                            <input type="text" v-model="content" id="comContent" value="lol">
+                        </div>
+                        <input type="submit" value="Modifier" >
+                    </form>
+                    <!-- <button>Supprimer</button> -->
                 </div>
             </div>
         </div>
@@ -24,14 +35,37 @@
 import newDate from '~/utils/newDate'
 export default {
     middleware:'auth',
-  methods: {
-      newDate,
-  },
-    props:{
-    comments: {
-      type: Array,
-      default: []
+    methods: {
+        newDate,
+        modifyComment(){
+            this.$axios.put( '/comments/' + event.srcElement.id , {
+                postid: this.$route.params.id,
+                content: this.content,
+                userid:this.$auth.user.id,
+            })
+            .then((response) => {
+                console.log("Commentaire Modifié")
+                this.$nuxt.refresh()
+            })
+            .catch( (error) => {
+                console.log(error)
+                if(error.response.data.errors){
+                    this.errors = error.response.data.errors
+                }
+            });
+        }
+    },
+        props:{
+        comments: {
+        type: Array,
+        default: []
+        }
+    },
+    data(){
+        return {
+            content:null,
+            isHidden: true
+        }
     }
-  },
 }
 </script>

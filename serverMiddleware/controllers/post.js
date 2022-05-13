@@ -67,9 +67,7 @@ exports.modifyPost = (req, res, next) => {
       } : { ...req.body }; // sinon on reprend body*/
     Post.update({
         title: req.body.title,
-        content: req.body.content,
-        image: req.body.image,
-        image_desc: req.body.image_desc 
+        content: req.body.content
         },
         { where: {id: req.params.id} }) // modification de la sauce
       .then(() => res.status(200).json({ message: 'Objet modifié !'}))
@@ -116,4 +114,64 @@ exports.deletePost = (req, res, next) => {
         }
       )
     .catch(error => res.status(400).json({ error: new Error('Problème lors de la suppression!') }));
+}
+
+exports.modifyLike = (req, res, next) => {
+  // récupérer l'id dans l'url de la requete
+  Post.findAll({where: {
+    id: req.params.id
+  }}).then(
+    (post) => {
+      console.log(post.userLiked)
+      const userLiked = post.userLiked.split(' ');
+      let userAlreadyLiked = false;
+      console.log("userlike" + userLiked)
+      if (userLiked.length <= 0) {
+        userAlreadyLiked = false;
+      } else {
+        for (let i =0; i<userLiked.length;++i){
+          if(userLiked[i]==req.body.userId) {
+             userAlreadyLiked=true;
+          }
+          console.log(userLiked[i])
+       }
+      }
+      
+      // Ajout d'un like 
+        // verification non présence de l'user dans la liste des like et si requete est un like
+        if (!userAlreadyLiked && req.body.like === 1){
+          console.log("update notlike")
+          Post.update(
+              { where: {id: req.params.id} }, 
+                {
+                    likes: sequelize.literal('like + 1'), 
+                    userLiked: req.body.userId
+                }
+            )
+            .then(() => res.status(200).json({ message: 'Like modifié !'}))
+            .catch(error => res.status(400).json({ error })); 
+        } 
+        // Retirer un like
+        // verification  présence de l'user dans la liste des like et si requete est un déjà like
+        if (userAlreadyLiked && req.body.like === 0){
+          Post.update(
+              { where: {id: req.params.id} }, 
+                {
+                  likes: sequelize.literal('like - 1'),  
+                  usersLiked: ""
+                }
+            )
+            .then(() => res.status(200).json({ message: 'Like modifié !'}))
+            .catch(error => res.status(400).json({ error })); 
+        }
+      }
+
+  ).catch(
+    (error) => {
+      res.status(404).json({
+        error: error
+      });
+    }
+  );
+
 }

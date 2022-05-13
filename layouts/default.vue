@@ -11,7 +11,7 @@
             <div>
                 <nuxt-link   class='app-navbar' to="/">Home</nuxt-link>
             </div>
-            <div >
+            <div v-if="$auth.hasScope('isAdmin')">
                 <nuxt-link class='app-navbar' to="/admin">Admin Page</nuxt-link>
             </div>
             <div v-if="$auth.loggedIn">

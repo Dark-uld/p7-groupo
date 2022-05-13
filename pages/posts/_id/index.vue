@@ -17,7 +17,23 @@
                 <nuxt-link  :to="`/posts/${post[0].id}/modifypost`">Modifier</nuxt-link>
                 <button @click="deleteRecord()">Delete</button>
             </div>
+            <hr/>
+            <hr/>
+
             <div>
+                <form action=""
+                method="post"
+                @submit.prevent="submitForm()">
+                    <div>
+                        <label for="">Envoyez un commentaire</label>
+                        <input type="text" v-model="content">
+                    </div>
+                    <input type="submit" value="Register">
+                </form>
+            </div>
+            <hr/>
+            <hr/>
+            <div v-if="`${comments}`">
                 <div v-if="`${comments.length}`<1">No Comment</div>
                 <div v-else>
                     <Comments :comments="comments"/>
@@ -31,56 +47,74 @@
 <script>
 import newDate from '~/utils/newDate'
 export default {
-  head(){
-    return {
-        title: this.post[0].title,
-        meta: [{
-            name: 'description',
-            content: `Ce post a été créé par ${this.post[0].User.name}`,
-            hid: 'description'
-        }]
-    }
-  },
-  
-  middleware: 'auth',
-  data(){
-    return{
-      errors:null,
-      content:null,
-      userid:null,
-      postid:null,
-    }
-  },
-  methods: {
-      newDate,
-      deleteRecord(){
-      if(confirm("Êtes-vous sure?") === true){
-        this.$axios.delete('/posts/' + this.$route.params.id)
-          .then((response) => {
-              this.$router.push({ name:'index', params:{ deleted:'yes' } })
-            
-          })
-          .catch( (error) => {
-            console.log(error);
-          });
-      }
-    }
-  },
-  async asyncData(context){
-    const [postRes, comRes] = await Promise.all([
-        
-        context.$axios.get('/posts/'+ context.route.params.id),
-        context.$axios.get('/comments', {
-            data: {
-                postid: context.route.params.id
+    head(){
+        return {
+            title: this.post[0].title,
+            meta: [{
+                name: 'description',
+                content: `Ce post a été créé par ${this.post[0].User.name}`,
+                hid: 'description'
+            }]
+        }
+    },
+    
+    middleware: 'auth',
+    data(){
+        return{
+        errors:null,
+        content:null,
+        userid:null,
+        postid:null,
+        }
+    },
+    methods: {
+        newDate,
+        deleteRecord(){
+            if(confirm("Êtes-vous sure?") === true){
+                this.$axios.delete('/posts/' + this.$route.params.id)
+                .then((response) => {
+                    this.$router.push({ name:'index', params:{ deleted:'yes' } })
+                    
+                })
+                .catch( (error) => {
+                    console.log(error);
+                });
             }
-        })
-        
-    ])
-    return {
-        post : postRes.data,
-        comments: comRes.data
-    }
-    }
+        },
+        submitForm(){
+            this.$axios.post( '/comments', {
+                postid: this.$route.params.id,
+                content: this.content,
+                userid:this.$auth.user.id
+                })
+                .then((response) => {
+                console.log("Commentaire Créé")
+                this.$nuxt.refresh()
+                })
+                .catch( (error) => {
+                console.log(error)
+                if(error.response.data.errors){
+                    this.errors = error.response.data.errors
+                }
+                });
+        }
+    },
+    async asyncData(context){
+        const [postRes, comRes] = await Promise.all([
+            
+            context.$axios.get('/posts/'+ context.route.params.id),
+            context.$axios.get('/comments', {
+                data: {
+                    postid: context.route.params.id
+                }
+            })
+            
+        ])
+        return {
+            post : postRes.data,
+            comments: comRes.data
+        }
+    },
+
 }
 </script>
