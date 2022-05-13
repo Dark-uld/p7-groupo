@@ -33,8 +33,8 @@
             </div>
             <hr/>
             <hr/>
-            <div v-if="`${comments}`">
-                <div v-if="`${comments.length}`<1">No Comment</div>
+            <div>
+                <div v-if="!`${comments}`">No Comment</div>
                 <div v-else>
                     <Comments :comments="comments"/>
                 </div>
@@ -46,6 +46,7 @@
 </template>
 <script>
 import newDate from '~/utils/newDate'
+import axios from 'axios'
 export default {
     head(){
         return {
@@ -65,6 +66,7 @@ export default {
         content:null,
         userid:null,
         postid:null,
+        comments:[]
         }
     },
     methods: {
@@ -97,24 +99,39 @@ export default {
                     this.errors = error.response.data.errors
                 }
                 });
-        }
+        },
+        
     },
     async asyncData(context){
-        const [postRes, comRes] = await Promise.all([
+        const [postRes] = await Promise.all([
             
             context.$axios.get('/posts/'+ context.route.params.id),
-            context.$axios.get('/comments', {
+           /* context.$axios.get('/comments', {
                 data: {
                     postid: context.route.params.id
                 }
-            })
+            })*/
             
         ])
         return {
             post : postRes.data,
-            comments: comRes.data
+           // comments: comRes.data
         }
     },
+    mounted(){
+            this.$axios.get('/comments/'+ this.$route.params.id)
+            .then((response) => {
+                console.log("Commentaire Créé")
+                this.comments = response.data
+            })
+            .catch( (error) => {
+                console.log(error)
+                if(error.response.data.errors){
+                    this.errors = error.response.data.errors
+                }
+            })
+        
+    }
 
 }
 </script>

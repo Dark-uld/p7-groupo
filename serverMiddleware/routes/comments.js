@@ -16,7 +16,7 @@ const comCtrl = require ('../controllers/comment');
 //const likeCtrl = require ('../controllers/like')
 
 // Route Affichage de toutes les posts
-router.get('/', authent, comCtrl.getAllComment);
+router.get('/:id', authent, comCtrl.getAllComment);
 // Route Creation d'un post
 router.post('/', authent, comCtrl.createComment);
 // Route Modification d'un post

@@ -3,6 +3,8 @@ const Post = require ('../models/Post');
 const User = require ('../models/User');
 
 exports.getAllComment = (req, res, next ) => {
+  
+
     Comment.findAll({ 
       include: [{
         model: User,
@@ -12,7 +14,7 @@ exports.getAllComment = (req, res, next ) => {
        order: [ [ 'createdAt', 'DESC' ]]
        ,
        where: {
-        postid: req.body.postid
+        postid: req.params.id
       }
     })
     .then(

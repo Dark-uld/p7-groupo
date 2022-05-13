@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`posts` (
 	`updatedAt` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `FK_posts_users` (`userid`) USING BTREE,
-	CONSTRAINT `FK_posts_users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+	CONSTRAINT `FK_posts_users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `groupomania`.`comments` (
@@ -42,5 +42,5 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`comments` (
 	INDEX `FK__users` (`userid`) USING BTREE,
 	INDEX `FK__posts` (`postid`) USING BTREE,
 	CONSTRAINT `FK__posts` FOREIGN KEY (`postid`) REFERENCES `groupomania`.`posts` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-	CONSTRAINT `FK__users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+	CONSTRAINT `FK__users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 );

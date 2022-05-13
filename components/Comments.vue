@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="app-post" v-for="comment in comments">
+        <div class="app-post" v-for="(comment,index) in comments" :key="`${comment.id}`">
             <div class="app-post-container">
                 <div class="app-post-head">
                     <div class="app-post-name">{{comment.User.name}} </div> 
@@ -66,6 +66,6 @@ export default {
             content:null,
             isHidden: true
         }
-    }
+    },
 }
 </script>

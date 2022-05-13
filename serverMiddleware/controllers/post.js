@@ -122,20 +122,17 @@ exports.modifyLike = (req, res, next) => {
     id: req.params.id
   }}).then(
     (post) => {
-      console.log(post.userLiked)
+      console.log(post)
       const userLiked = post.userLiked.split(' ');
+      console.log(userLiked)
       let userAlreadyLiked = false;
       console.log("userlike" + userLiked)
-      if (userLiked.length <= 0) {
-        userAlreadyLiked = false;
-      } else {
         for (let i =0; i<userLiked.length;++i){
           if(userLiked[i]==req.body.userId) {
              userAlreadyLiked=true;
           }
-          console.log(userLiked[i])
        }
-      }
+      
       
       // Ajout d'un like 
         // verification non présence de l'user dans la liste des like et si requete est un like
@@ -145,7 +142,7 @@ exports.modifyLike = (req, res, next) => {
               { where: {id: req.params.id} }, 
                 {
                     likes: sequelize.literal('like + 1'), 
-                    userLiked: req.body.userId
+                    userLiked: req.body.userid
                 }
             )
             .then(() => res.status(200).json({ message: 'Like modifié !'}))
