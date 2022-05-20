@@ -1,8 +1,9 @@
 const Sequelize  = require('sequelize');
 const sequelize = require('../utils/database');
 const User = require ('../models/User');
+const Post = require ('../models/Post');
 
-const Post = sequelize.define('Post', {
+const Like = sequelize.define('Like', {
      // Model attributes are defined here
     id: {
         type: Sequelize.INTEGER,
@@ -14,28 +15,17 @@ const Post = sequelize.define('Post', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    title: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    content: {
-        type: Sequelize.TEXT,
+    postid: {
+        type: Sequelize.INTEGER,
         allowNull: false
     },
   
 });
 
-/* Post.associate = (User)=>{
-    Post.belongsTo(User, {
-        foreignKey: {
-            allowNull: false,
-            name:'id'
-        }
-    })
-    
-};*/
+User.hasMany(Like)
+Post.hasMany(Like)
+Like.belongsTo(User)
+Like.belongsTo(Post)
 
-User.hasMany(Post)
-Post.belongsTo(User)
 
-module.exports = Post;
+module.exports = Like;

@@ -15,7 +15,11 @@
           <button @click="userState()">User</button>
       </div>
       <div>
-        <Posts :posts="posts"/>
+        
+        <div v-if="posts.length>0"
+          <Posts :posts="posts"/>
+        </div>
+        <div v-if="posts.length==0">Pas de post</div>
       </div>
     </div>
      

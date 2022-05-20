@@ -29,7 +29,7 @@ const Comment = sequelize.define('Comment', {
 User.hasMany(Comment)
 Post.hasMany(Comment)
 Comment.belongsTo(User)
-Comment.belongsTo(User)
+Comment.belongsTo(Post)
 
 
 module.exports = Comment;
