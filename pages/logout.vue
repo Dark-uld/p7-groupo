@@ -14,7 +14,10 @@ export default {
   methods: {
   },
   /*async asyncData(context){
-      await context.$auth.logout()
+      await Promise.all([
+        context.$store.commit('resetUser'),
+        context.$auth.logout()
+     ])
   },*/
   async fetch(){
       await Promise.all([

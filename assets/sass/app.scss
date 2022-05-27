@@ -4,6 +4,10 @@ html, body {
   @apply font-roboto;
 }
 
+h1{
+    @apply text-2xl font-bold ;
+}
+
 .app {
     // display flex
     &-flex {

@@ -1,14 +1,11 @@
 <template>
     <div>
-        <div class="app-post-bord">
-                    <img src="/images/LogoS/icon-above-font.png" class="app-post-logo app-rounded"/>
-        </div>
         <div class="app-post-container">
+            <h1>{{post[0].title}} </h1>
             <div class="app-post-head">
-                <div class="app-post-name">{{post[0].User.name}} </div> 
-                <div class="app-post-date">{{newDate(post[0].createdAt)}}</div>
+                <div class="app-post-name">Posté par {{post[0].User.name}} </div> 
+                <div class="app-post-date">le {{newDate(post[0].createdAt)}}</div>
             </div>
-            <div>{{post[0].title}}</div>
             <div>
                 {{post[0].content}}
                 <div v-if="`${post[0].createdAt}` != `${post[0].updatedAt}`"> Modifié le {{newDate(post[0].updatedAt)}}</div>
