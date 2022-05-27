@@ -22,7 +22,7 @@ export default (content, contentId) => {
 
         if (images.length>0){
             previewConteneur = `
-                <a class="app-flex-col app-center max-w-full" href="${data.url}">
+                <a class="app-flex-col app-center max-w-full" href="${data.url}" target="_blank" rel="noopener noreferrer" aria-label="Lien Article intitulé ${data.title}" >
                 <article class="preview-content app-center">
                 <div class="preview-img-container">
                 <img src="${data.images}" alt="preview de l'article" class="preview-img"/>
@@ -37,7 +37,7 @@ export default (content, contentId) => {
             `;
         } else if(desc.length>0) {
             previewConteneur = `
-                <a class="app-flex-col app-center max-w-full" href="${data.url}">
+                <a class="app-flex-col app-center max-w-full" href="${data.url}" target="_blank" rel="noopener noreferrer" >
                 <article class="preview-content app-center">
                 <div class="w-full">
                     <h3 class="preview-title  app-olap">${data.title}</h3>
@@ -49,7 +49,7 @@ export default (content, contentId) => {
             `;
         } else {
             previewConteneur = `
-                <a class="app-flex-col app-center max-w-full" href="${data.url}">
+                <a class="app-flex-col app-center max-w-full" href="${data.url}" target="_blank" rel="noopener noreferrer" >
                 <article class="preview-content app-center">
                 <div>
                     <h3 class="preview-title  app-olap">${data.title}</h3>

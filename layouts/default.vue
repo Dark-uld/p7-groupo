@@ -2,7 +2,7 @@
 <div class="app">
     <header class="app-header">
         <div>
-            <img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded">
+            <img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded" alt="Logo de Groupomania">
         </div>
         <div class='app-flex-row'>
             <div v-if="$auth.loggedIn">
