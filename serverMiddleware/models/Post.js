@@ -22,6 +22,7 @@ const Post = sequelize.define('Post', {
         type: Sequelize.TEXT,
         allowNull: false
     },
+
   
 });
 

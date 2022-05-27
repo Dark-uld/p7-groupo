@@ -26,7 +26,7 @@ html, body {
     }
 
     &-header {
-        @apply px-8 py-5 w-screen flex flex-row items-center bg-red-500 justify-between ;
+        @apply px-8 py-5 w-full flex flex-row items-center bg-red-500 justify-between ;
     }
 
     &-logo {
@@ -34,7 +34,7 @@ html, body {
     }
 
     &-container {
-        @apply px-8 py-4 w-screen ;
+        @apply px-8 py-4 w-full ;
     }
 
     &-title {
@@ -48,12 +48,16 @@ html, body {
     &-navbar {
         @apply px-1 ;
     }
+
+    &-olap{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     
     
 
     &-post {
-        display: flex;
-        flex-direction: row;
         width: 500px;
         height: auto;
         border: 1px solid black;

@@ -3,16 +3,18 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/user');
 // verification que le mail a un format valide
-//const emailValidating = require('../middleware/email');
+const emailValid = require('../middleware/emailValide');
 // verification que le password a un format valide
-// const passwordValidating = require('../middleware/password');
+const passValid = require('../middleware/passValide');
 
 // Route création de compte
-router.post('/signup',userCtrl.signup);
+router.post('/signup',emailValid, passValid, userCtrl.signup);
 // Route login 
-router.post('/login',userCtrl.login);
+router.post('/login',emailValid, passValid, userCtrl.login);
 // Route user
-router.get('/user', userCtrl.user)
+router.get('/user', userCtrl.user);
+//Route récup donnée de l'user
+router.get('/user/:id', userCtrl.getUser)
 
 
 module.exports = router;

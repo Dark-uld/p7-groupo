@@ -1,38 +1,31 @@
+import axios from 'axios'
+
+
 export const state = () => ({
-    like: 0,
-    postLiked:[]
-  })
+    postLiked:[],
+    userCon:[]
+})
+
+export const getters = () => ({
+})
+
+export const actions = {
+  async fetchLikes ({ commit }) {
+    const response = await axios.get('http://localhost:3000/api/likes')
+    commit('setLikes', response.data)
+  },
+  async fetchUser ({commit, value}) {
+    const response = await axios.get('http://localhost:3000/api/auth/user/'+ value)
+    commit('setUser', response.data)
+  }
+}
+
 
 export const mutations = {
-    liking(state,value) {
-      let alreadyLiked = false
-      let postId=""
-      for(let i=0; i < state.postLiked.length;i++){
-        if(state.postLiked[i]==value){
-          alreadyLiked=true
-          postId=i
-        }
-      }
-      if(!alreadyLiked){
-        state.postLiked.push(value)
-      } else {
-        state.postLiked.splice(postId,1)
-      }
-    },
-    ajoutLike(state, value){
-      state.postLiked.push(value)
-    },
-    retireLike(state, value){
-      for(let i=0; i < state.postLiked.length;i++){
-        if (state.postLiked[i]==value){
-          if(i==0){
-            state.postLiked.splice(0,1)
-          } else if ( i == state.postLiked.length-1){
-            state.postLiked.splice(i,1)
-          } else {
-            state.postLiked.splice(i-1,1)
-          }
-        }
-      }
-    }
+    setLikes: (state, likes) => (state.postLiked = likes),
+    setUser: (state, user) => (state.userCon = user)
 }
+
+
+
+

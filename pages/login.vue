@@ -16,18 +16,16 @@
                     <label for="">Email</label>
                     <input type="text" class=""
                     :class="{ 'is-invalid': errors && errors.email }"
-                    v-model="email">
-                    
+                    v-model="email"/>
                 </div>
 
                 <div class="">
                     <label for="">Password</label>
                     <input type="password" class=""
                     :class="{ 'is-invalid': errors && errors.password }"
-                    v-model="password">
+                    v-model="password"/>
                     
                 </div>
-
                 
 
                 <input type="submit" value="Login" class="">
@@ -61,12 +59,9 @@ export default {
             password: this.password
           }
         })
-        .then(() => console.log('Logged In!'))
+        .then(() =>  console.log('Logged In!'))
         .catch( (error) => {
-          console.log(error)
-          if(error.response.data.message){
-            this.login_error = error.response.data.message
-          }
+          alert("Le mail ou le mot de passe est incorrect")
         })
     }
   }

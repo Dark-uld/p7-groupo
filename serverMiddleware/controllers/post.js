@@ -57,14 +57,6 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-    // test si il y a une nouvelle image
-    /*const sauceObject = req.file ?
-      {
-        // si fichier existe, on recup la nouvelle image
-        ...JSON.parse(req.body.sauce),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        
-      } : { ...req.body }; // sinon on reprend body*/
     Post.update({
         title: req.body.title,
         content: req.body.content
@@ -81,9 +73,7 @@ exports.deletePost = (req, res, next) => {
     .then(
         (post) => {
           // Si pas une sauce existance
-          console.log("au"+req.auth.userId+"id"+post[0].userid);
-
-          if (!post) {
+          if (!post[0]) {
             res.status(404).json({
               error: new Error('No such Post!')
             });
@@ -113,7 +103,7 @@ exports.deletePost = (req, res, next) => {
           
         }
       )
-    .catch(error => res.status(400).json({ error: new Error('Problème lors de la suppression!') }));
+    .catch(error => res.status(400).json({ error: error.message}));
 }
 
 exports.modifyLike = (req, res, next) => {

@@ -47,7 +47,7 @@ export default {
         })
         .then((response) => {
           console.log(response)
-          this.$router.push({ name:'index', params:{ created:'yes' } })
+          this.$router.push({ name:'posts', params:{ created:'yes' } })
           
         })
         .catch( (error) => {

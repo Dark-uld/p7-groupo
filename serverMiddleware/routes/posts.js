@@ -25,4 +25,6 @@ router.get('/:id', authent, postCtrl.getOnePost);
 router.put('/:id', authent, postCtrl.modifyPost);
 // Route Supression d'un post
 router.delete('/:id', authent, postCtrl.deletePost);
+// Route Modification des likes d'un post
+router.put('/:id/like', authent, postCtrl.modifyLike);
 module.exports = router;

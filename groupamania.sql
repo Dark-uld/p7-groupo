@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`likes` (
 	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`postid` INT(11) UNSIGNED NOT NULL DEFAULT '0',
 	`userid` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+	`createdAt` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+	`updatedAt` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `FK__likes_posts` (`postid`) USING BTREE,
 	INDEX `FK__likes_users` (`userid`) USING BTREE,

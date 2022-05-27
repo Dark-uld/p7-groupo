@@ -38,7 +38,6 @@
                 <div v-else>
                     <Comments :comments="comments"/>
                 </div>
-                <button>like</button>
             </div>
         </div>
     </div>
@@ -75,7 +74,7 @@ export default {
             if(confirm("Êtes-vous sure?") === true){
                 this.$axios.delete('/posts/' + this.$route.params.id)
                 .then((response) => {
-                    this.$router.push({ name:'index', params:{ deleted:'yes' } })
+                    this.$router.push({ name:'posts', params:{ deleted:'yes' } })
                     
                 })
                 .catch( (error) => {
@@ -114,8 +113,6 @@ export default {
             comments: comRes.data
         }
     },
-    mounted(){
-    }
 
 }
 </script>

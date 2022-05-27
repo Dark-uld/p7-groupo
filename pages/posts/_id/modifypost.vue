@@ -8,12 +8,12 @@
 
           <div >
             <label for="">Titre</label>
-            <input type="text" v-model="title">
+            <input type="text" v-model="title" value="`${post.title}`" >
           </div>
 
           <div >
             <label for="">Contenu du post</label>
-            <input type="text" v-model="content">
+            <input type="text" v-model="content" value="`${post.content}`" >
           </div>
 
           <input type="submit" value="Mise à Jour">
@@ -50,10 +50,9 @@ export default {
 
   methods:{
      fillFormData(){
-      this.title = this.post.title
-      this.userid = this.post.userid
+      this.title = this.post.title,
+      this.userid = this.post.userid,
       this.content = this.post.content
-
     },
     submitForm(){
       this.$axios.put( '/posts/' + this.$route.params.id, {
@@ -62,10 +61,7 @@ export default {
           userid:this.$auth.user.id
         })
         .then((response) => {
-          console.log(response)
-          if(response.data._id){
-            this.$router.push({ name:'posts-id', params:{ updated:'yes', id: this.$route.params.id } })
-          }
+            this.$router.push({ name:'posts', params:{ updated:'yes', id: this.$route.params.id } })
         })
         .catch( (error) => {
           console.log(error)

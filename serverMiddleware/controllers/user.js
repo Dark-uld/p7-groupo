@@ -64,14 +64,28 @@ exports.user = function(req, res) {
         return res.status(401).json({message: 'unauthorized'})
       } else {
         return res.json({ user: decoded })
-        /*User.findAll({where: {
-        id: decoded.id
-        }})
-        .then( (user) => {res.status(200).json(user);} )*/
       }
     });
   }
   else{
     return res.status(401).json({message: 'unauthorized'})
   }
+}
+
+exports.getUser = function(req, res){
+  User.findOne({
+    where:{ id: req.params.id },
+    attributes: ['id', 'name','email','isAdmin']
+  })
+  .then(
+    (user) => {
+      res.status(200).json(user);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        message:"Erreur lors de la récupération de l'user"
+      });
+    }
+  );
 }

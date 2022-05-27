@@ -7,6 +7,11 @@ export default (content) => {
             url = contentSplit[i];
         }
     }
-     return url;
+
+    if(url.includes("instagram")){
+        url="";
+    }
+
+    return url;
     
 }
