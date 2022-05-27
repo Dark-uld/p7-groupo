@@ -1,21 +1,13 @@
 <template>
 <div class="app">
     <header class="app-header">
-        <div >
-            <img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded"/>
-        </div>
-        <div class="app-search">
-            
+        <div>
+            <img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded">
         </div>
         <div class='app-flex-row'>
-            <div>
-                
-            </div>
-            <div v-if="$auth.hasScope('isAdmin')">
-                <nuxt-link class='app-navbar' to="/admin">Admin Page</nuxt-link>
-            </div>
             <div v-if="$auth.loggedIn">
                 <nuxt-link  class='app-navbar' to="/posts">Home</nuxt-link>
+                <nuxt-link v-if="userCon.isAdmin" class='app-navbar' to="/admin">AdminPage</nuxt-link>
                 <nuxt-link  class='app-navbar' to="/logout" >Logout</nuxt-link>
             </div>
             <div  v-if="!$auth.loggedIn">
@@ -30,6 +22,13 @@
 </template>
 
 <script>
+export default {
+    computed: {
+        userCon(){
+            return this.$store.state.userCon
+        }
+    },
+}
 </script>
 
 <style lang="scss">

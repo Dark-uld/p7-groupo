@@ -8,10 +8,19 @@
 </template>
 
 <script>
+import store from '~/store/index'
 export default {
   middleware: 'auth',
-  async asyncData(context){
-    await context.$auth.logout()
+  methods: {
   },
+  /*async asyncData(context){
+      await context.$auth.logout()
+  },*/
+  async fetch(){
+      await Promise.all([
+        this.$store.commit('resetUser'),
+        this.$auth.logout()
+     ])
+  }
 }
 </script>

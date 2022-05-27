@@ -8,7 +8,7 @@ export default (content) => {
         }
     }
 
-    if(url.includes("instagram")){
+   if(url.includes("instagram")){
         url="";
     }
 

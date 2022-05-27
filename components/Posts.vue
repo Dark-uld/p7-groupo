@@ -9,9 +9,9 @@
                 </div>
                 <div>{{post.title}}</div>
                 <div>
-                    <div v-if="`${retrieveUrl(post.content)}`" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
+                    <!--<div v-if="`${retrieveUrl(post.content)}`" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
                         {{linkPreview(post.content,post.id)}}
-                    </div>
+                    </div> -->
                     {{post.content}}
 
                     <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
@@ -57,6 +57,7 @@ export default {
         newDate,
         retrieveUrl,
         linkPreview,
+        // fonction  like et dislike le post
         handleLiking(value, check) {
             let alreadyLiked = check
             if(!alreadyLiked){
@@ -68,10 +69,7 @@ export default {
                    this.$store.dispatch('fetchLikes')
                 })
                 .catch( (error) => {
-                console.log(error)
-                if(error.response.data.errors){
-                    this.errors = error.response.data.errors
-                }
+                    console.log(error);
                 });
             } else {
                 this.$axios.delete('/likes/' + value)
@@ -83,6 +81,7 @@ export default {
                 });
             }
         },
+        // fonction verifie si post liked par user
         checkLike(value){
             let listLikes = this.$store.state.postLiked
             let postAlreadyLiked=false
@@ -94,6 +93,7 @@ export default {
 
             return postAlreadyLiked
         },
+        // fonction verifie le nombre de likes par post
         postLikes(value){
             let listLikes = this.$store.state.postLiked
             let numberOfLikes = 0

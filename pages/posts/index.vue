@@ -4,8 +4,7 @@
       <div v-if="$route.params.deleted=='yes'">Post supprimé !</div>
       <h1> Liste des posts</h1>
       <div>
-            {{userCon}}
-          <nuxt-link to="posts/newpost">Créer un nouveau post</nuxt-link>
+          <nuxt-link to="/posts/newpost">Créer un nouveau post</nuxt-link>
           <button @click="userState()">User</button>
       </div>
       <div>
@@ -43,9 +42,6 @@ export default {
     },
     
     computed: {
-        userCon(){
-            return this.$store.state.userCon
-        }
     },
     async fetch() {
         await this.$store.dispatch('fetchUser', this.$auth.user.id)

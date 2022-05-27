@@ -34,7 +34,7 @@
             <hr/>
             <hr/>
             <div>
-                <div v-if="!`${commentsg}`">No Comment</div>
+                <div v-if="!`${comments}`">No Comment</div>
                 <div v-else>
                     <Comments :comments="comments"/>
                 </div>
