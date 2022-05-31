@@ -72,7 +72,6 @@ export default {
                 this.$axios.delete('/posts/' + this.$route.params.id)
                 .then((response) => {
                     this.$router.push({ name:'posts', params:{ deleted:'yes' } })
-                    
                 })
                 .catch( (error) => {
                     console.log(error);

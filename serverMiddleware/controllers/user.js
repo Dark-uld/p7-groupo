@@ -89,3 +89,71 @@ exports.getUser = function(req, res){
     }
   );
 }
+
+exports.getAllUser = function(req, res){
+  User.findAll({
+    attributes: ['id', 'name','email','isAdmin','createdAt','updatedAt']
+  })
+  .then(
+    (users) => {
+      res.status(200).json(users);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        message:"Erreur lors de la récupération de la liste des users"
+      });
+    }
+  );
+}
+
+exports.modifyUser = function(req, res){
+  User.update({
+    isAdmin: req.body.isAdmin
+    },
+    { where: {id: req.params.id} })
+  .then(() => res.status(200).json({ message: 'Utilisateur Modifié !'}))
+  .catch(error => res.status(400).json({ error }));
+}
+
+exports.deleteUser = (req, res, next) => {
+  User.findAll({where: {
+    id: req.params.id
+  }})
+  .then(
+      (user) => {
+        if (!user[0]) {
+          res.status(404).json({
+            error: new Error('No such User!')
+          });
+        } else if (user[0].id != req.auth.userId && !req.utilisateur.isAdmin) { // si id créateur correspond pas à l'id user qui requete ou pas un admin
+          console.log('lol')
+          res.status(400).json({
+            error: new Error('Unauthorized request!')
+          });
+        } else {
+          User.destroy({
+              where: {
+                  id: req.params.id
+              }
+          }).then( // supression de la sauce 
+            () => {
+              res.status(200).json({
+                message: 'Deleted!'
+              });
+            }
+          ).catch(
+            (error) => {
+              res.status(400).json({
+                error: new Error('Problème lors de la suppression!')
+              });
+            }
+          );
+        }
+        
+      }
+    )
+  .catch(error => res.status(400).json({ error: error.message}));
+}
+
+

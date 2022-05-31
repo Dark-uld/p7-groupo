@@ -6,6 +6,7 @@ const postRoutes = require('./routes/posts');
 const commentRoutes = require('./routes/comments');
 const likeRoutes = require('./routes/likes');
 const urlRoutes = require('./routes/urls');
+const adminRoutes = require('./routes/admin');
 const path = require('path');
 
 
@@ -35,6 +36,7 @@ app.use("/posts", postRoutes);
 app.use('/comments', commentRoutes);
 app.use('/likes', likeRoutes);
 app.use('/urls', urlRoutes);
+app.use('/admin', adminRoutes);
 
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));

@@ -63,7 +63,6 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response)
           if(response.data._id){
             this.$router.push({ name:'login', params:{ registered:'yes' } })
             // log in if successfully registered

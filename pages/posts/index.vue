@@ -24,6 +24,16 @@ import store from '~/store/index'
 export default {
     middleware:'auth'
     ,
+    head(){
+        return {
+            title: 'Espace Employé',
+            meta: [{
+                name: 'description',
+                content: `Bienvenue sur le site de Groupomania, un espace de partage avec vos collègues de vos récentes découvertes: articles, memes...`,
+                hid: 'description'
+            }]
+        }
+    },
     created(){
     },
     methods:{

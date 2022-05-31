@@ -7,21 +7,21 @@
                     <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
                 </div>
                 <div>
-                
                     {{comment.content}}
                     <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`"> Modifié le {{newDate(comment.updatedAt)}}</div>
                 </div>
                 <div v-if="`${comment.userid}`==`${$auth.user.id}`">
-                    <button v-on:click="isHidden = !isHidden">Modifier</button>
+                    <button v-on:click="showForm(comment.id)">Modifier</button>
                     <form :id="`${comment.id}`" action=""
                     method="put"
                     @submit.prevent="modifyComment()"
-                    v-if="!isHidden">
+                    hidden>
                         <div>
                             <label for="comContent">Modifier le commentaire</label>
                             <input type="text" v-model="content" id="comContent" value="lol">
                         </div>
-                        <input type="submit" value="Modifier" >
+                        <input type="submit" value="Valider" >
+                        <button v-on:click="showForm(comment.id)">Annuler</button>
                     </form>
                     <!-- <button>Supprimer</button> -->
                 </div>
@@ -37,6 +37,14 @@ export default {
     middleware:'auth',
     methods: {
         newDate,
+        showForm(value){
+            let form = document.getElementById(value);
+            if(form.hasAttribute('hidden')){
+                form.removeAttribute('hidden')
+            } else {
+                form.setAttribute('hidden', true)
+            }
+        },
         modifyComment(){
             this.$axios.put( '/comments/' + event.srcElement.id , {
                 postid: this.$route.params.id,
@@ -45,7 +53,7 @@ export default {
             })
             .then((response) => {
                 console.log("Commentaire Modifié")
-                this.$nuxt.refresh()
+                location.reload()
             })
             .catch( (error) => {
                 console.log(error)
@@ -55,7 +63,7 @@ export default {
             });
         }
     },
-        props:{
+    props:{
         comments: {
         type: Array,
         default: []

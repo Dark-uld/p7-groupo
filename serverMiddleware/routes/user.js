@@ -6,6 +6,8 @@ const userCtrl = require('../controllers/user');
 const emailValid = require('../middleware/emailValide');
 // verification que le password a un format valide
 const passValid = require('../middleware/passValide');
+// middleware pour proteger la route
+const authent = require('../middleware/auth');
 
 // Route création de compte
 router.post('/signup',emailValid, passValid, userCtrl.signup);
@@ -15,6 +17,7 @@ router.post('/login',emailValid, passValid, userCtrl.login);
 router.get('/user', userCtrl.user);
 //Route récup donnée de l'user
 router.get('/user/:id', userCtrl.getUser)
+router.delete('/user/:id', authent, userCtrl.deleteUser);
 
 
 module.exports = router;
