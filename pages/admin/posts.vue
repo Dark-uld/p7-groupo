@@ -3,9 +3,7 @@
         <h2>
             Liste des posts et commentaires
         </h2>
-        <div class="app-post app-flex-col" v-for="(post,index) in posts"  :key="index">
-            <h3>{{post.title}}</h3>
-        </div>
+        <PremPost :posts="posts"/>
     </div>
 </template>
 <script>
