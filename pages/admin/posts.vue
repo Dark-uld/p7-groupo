@@ -9,7 +9,7 @@
 <script>
 export default {
     async asyncData(context){
-        const {data} = await  context.$axios.get('/posts')
+        const {data} = await  context.$axios.get('/admin/posts')
         
         return {
             posts : data

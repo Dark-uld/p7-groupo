@@ -1,5 +1,6 @@
 const Post = require ('../models/Post');
 const User = require ('../models/User');
+const Comment = require ('../models/Comment');
 
 exports.createPost = (req, res, next) => {
   const post = Post.create({
@@ -162,3 +163,36 @@ exports.modifyLike = (req, res, next) => {
   );
 
 }
+
+exports.getAdminPost = (req, res, next ) => {
+  Post.findAll({ 
+    include: [{
+      model: User,
+      required: true,
+      attributes:['name']
+     },
+     {
+      model: Comment,
+      required: false,
+      attributes:['id','userid','content','createdAt','updatedAt'],
+      include: [{
+        model: User,
+        required: true,
+        attributes:['name']
+       }]
+     },
+    ],
+     order: [ [ 'createdAt', 'DESC' ]]
+  })
+  .then(
+    (posts) => {
+      res.status(200).json(posts);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+};

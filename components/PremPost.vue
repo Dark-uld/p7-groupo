@@ -9,7 +9,7 @@
                 <div>{{newDate(post.updatedAt)}}</div>
                 <button @click="deletePost(post.id)">Supprimer</button>
             </div>
-            
+            <PremCom :comments="post.Comments"/>
         </div>
     </div>
         
@@ -17,6 +17,7 @@
 
 <script>
 import newDate from '~/utils/newDate'
+import PremCom from '~/components/PremCom'
 import axios from 'axios'
 export default {
     
@@ -41,7 +42,7 @@ export default {
                     }
                 });
             }
-        }
+        },
     },
     props:{
         posts: {

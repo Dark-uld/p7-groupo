@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="app-post" v-for="(comment,index) in comments" :key="`${comment.id}`">
-            <div class="app-post-container">
-                <div class="app-post-name">{{comment.User.name}} </div> 
-                <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
+    lol
+     <div class="app-post" v-for="(comment,index) in comments" :key="`${comment.id}`">
+            <div class="app-post-container" :id="`${comment.id}`">
+                <div class="app-post-name">{{comment.User.name}} </div>
                 <div> {{comment.content}}</div>
                 <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
                 <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`">{{newDate(comment.updatedAt)}}</div>
@@ -21,7 +21,7 @@ export default {
     methods: {
         newDate,
         deleteComment(){
-            this.$axios.delete( '/admin/comments/' + event.srcElement.id)
+            this.$axios.delete( '/admin/comment/' + event.srcElement.id)
             .then((response) => {
                 console.log("Commentaire Supprimé")
                 location.reload()
