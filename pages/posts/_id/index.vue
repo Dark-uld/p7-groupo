@@ -109,6 +109,9 @@ export default {
             comments: comRes.data
         }
     },
+    async fetch() {
+        await this.$store.dispatch('fetchUser', this.$auth.user.id)
+    }
 
 }
 </script>

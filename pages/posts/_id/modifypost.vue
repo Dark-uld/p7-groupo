@@ -7,12 +7,12 @@
           @submit.prevent="submitForm()">
 
           <div >
-            <label for="">Titre</label>
+            <label for="title">Titre</label>
             <input type="text" v-model="title" value="`${post.title}`" >
           </div>
 
           <div >
-            <label for="">Contenu du post</label>
+            <label for="content">Contenu du post</label>
             <input type="text" v-model="content" value="`${post.content}`" >
           </div>
 

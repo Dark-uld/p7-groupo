@@ -77,7 +77,7 @@ exports.deletePost = (req, res, next) => {
             res.status(404).json({
               error: new Error('No such Post!')
             });
-          } else if (post[0].userid !== req.auth.userId) { // si id créateur sauce n'est pas id utilisateur
+          } else if (post[0].userid !== req.auth.userId && !req.utilisateur.isAdmin) { // si id créateur sauce n'est pas id utilisateur
             res.status(400).json({
               error: new Error('Unauthorized request!')
             });

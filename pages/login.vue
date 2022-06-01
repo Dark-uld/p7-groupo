@@ -13,14 +13,14 @@
                 @submit.prevent="submitForm()">
 
                 <div class="">
-                    <label for="">Email</label>
+                    <label for="email">Email</label>
                     <input type="text" class=""
                     :class="{ 'is-invalid': errors && errors.email }"
                     v-model="email"/>
                 </div>
 
                 <div class="">
-                    <label for="">Password</label>
+                    <label for="password">Password</label>
                     <input type="password" class=""
                     :class="{ 'is-invalid': errors && errors.password }"
                     v-model="password"/>

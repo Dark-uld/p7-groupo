@@ -55,15 +55,13 @@ exports.deleteComment = (req, res, next) => {
       id: req.params.id
   }})
   .then(
-      (post) => {
-        // Si pas une sauce existance
-        console.log("au"+req.auth.userId+"id"+post[0].userid);
+      (com) => {
 
-        if (!post) {
+        if (!com) {
           res.status(404).json({
             error: new Error('No such Comment!')
           });
-        } else if (post[0].userid !== req.auth.userId) { // si id créateur sauce n'est pas id utilisateur
+        } else if (com[0].userid !== req.auth.userId && !req.utilisateur.isAdmin) { // si id créateur sauce n'est pas id utilisateur
           res.status(400).json({
             error: new Error('Unauthorized request!')
           });

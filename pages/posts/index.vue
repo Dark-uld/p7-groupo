@@ -50,11 +50,8 @@ export default {
             posts : data
         }
     },
-    
-    computed: {
-    },
     async fetch() {
         await this.$store.dispatch('fetchUser', this.$auth.user.id)
-    }
+    },
 }
 </script>

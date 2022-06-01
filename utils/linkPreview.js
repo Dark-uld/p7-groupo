@@ -12,7 +12,7 @@ export default (content, contentId) => {
         (addElement(resp.data))
     }).catch(err => {
         // something went wrong
-        console.log(err.response.status)
+        console.log(err)
     })
 
     function addElement(data){

@@ -5,10 +5,6 @@ const router = express.Router();
 
 // middleware pour proteger la route
 const authent = require('../middleware/auth');
-//middleware pour l'image
-//const multer = require('../middleware/multer-config');
-//middleware pour verifier input du formulaire
-//const validateInput = require('../middleware/validateInput');
 
 
 // appel du model mongoose dans ce fichier
