@@ -5,7 +5,6 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/posts');
 const commentRoutes = require('./routes/comments');
 const likeRoutes = require('./routes/likes');
-const urlRoutes = require('./routes/urls');
 const adminRoutes = require('./routes/admin');
 const path = require('path');
 
@@ -35,7 +34,6 @@ app.use('/auth', userRoutes);
 app.use("/posts", postRoutes);
 app.use('/comments', commentRoutes);
 app.use('/likes', likeRoutes);
-app.use('/urls', urlRoutes);
 app.use('/admin', adminRoutes);
 
 

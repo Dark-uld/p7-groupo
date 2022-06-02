@@ -7,9 +7,7 @@ const router = express.Router();
 const authent = require('../middleware/auth');
 
 
-// appel du model mongoose dans ce fichier
 const comCtrl = require ('../controllers/comment');
-//const likeCtrl = require ('../controllers/like')
 
 // Route Creation d'un post
 router.post('/', authent, comCtrl.createComment);

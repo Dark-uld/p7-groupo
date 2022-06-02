@@ -1,0 +1,42 @@
+<template>
+
+<div> 
+    Mon compte  
+    <div>
+        <div>Mon nom: <span> {{user.name}}</span></div>
+        <div>Mon mail: <span> {{user.email}}</span></div>
+        <button v-if="!($auth.user.isAdmin==2)" @click="deleteAccount()">Supprimer le compte</button>
+    </div>
+    
+</div>
+</template>
+<script>
+export default {
+    middleware:'auth',
+    methods:{
+        deleteAccount(){
+            if(confirm("Êtes-vous sûr de vouloir supprimer votre comtpe?") === true){
+                 this.$axios.delete( '/auth/user/' + this.$auth.user.decoded.id)
+                .then((response) => {
+                    this.$auth.logout()
+                })
+                .catch( (error) => {
+                    console.log(error)
+                    if(error.response.data.errors){
+                        this.errors = error.response.data.errors
+                    }
+                });
+            }
+        }
+        
+    },
+    async asyncData(context){
+        const {data} = await  context.$axios.get('/auth/myuser')
+        
+        return {
+            user : data
+        }
+    }
+
+}
+</script>

@@ -8,7 +8,6 @@
                     <th>Email</th>
                     <th>isAdmin</th>
                     <th>Crée le</th>
-                    <th>Modifié le</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -18,11 +17,12 @@
                     <td> {{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.isAdmin}}</td>
+                    <td>
+                    <input type="number" name="isAdmin" min="0" max="1" :value="user.isAdmin" :id="`quantity${user.id}`">
+                    </td>
                     <td>{{newDate(user.createdAt)}}</td>
-                    <td>{{newDate(user.updatedAt)}}</td>
-                    <td><button>Modifier</button></td>
-                    <td><button>Supprimer</button></td>
+                    <td><button @click="modifyUser(user.id)">Modifier</button></td>
+                    <td><button @click="deleteUser(user.id)">Supprimer</button></td>
                 </tr>
             </tbody>          
         </table>
@@ -42,9 +42,9 @@ export default {
     },
     methods: {
         newDate,
-        deletePost(value){
-            if(confirm("Êtes-vous sure?") === true){
-                 this.$axios.delete( '/admin/posts/' + value)
+        deleteUser(value){
+            if(confirm("Êtes-vous sûr de vouloir supprimer ce compte ?") === true){
+                 this.$axios.delete( '/admin/user/' + value)
                 .then((response) => {
                     this.$nuxt.refresh()
                 })
@@ -54,6 +54,28 @@ export default {
                         this.errors = error.response.data.errors
                     }
                 });
+            }
+        },
+        modifyUser(value){
+            const isAdmin = document.getElementById(`quantity${value}`)
+            if( (isAdmin.value==0 || isAdmin.value==1) && confirm("Êtes-vous sûr de vouloir modifier ce compte?") === true ){
+                 this.$axios.put( '/admin/user/' + value,
+                    {
+                        isAdmin:isAdmin.value
+                    }
+                 )
+                .then((response) => {
+                    this.$nuxt.refresh()
+                })
+                .catch( (error) => {
+                    console.log(error)
+                    if(error.response.data.errors){
+                        this.errors = error.response.data.errors
+                    }
+                });
+            } else {
+                alert("Erreur lors de la modification du rang de l'utilisateur")
+                this.$nuxt.refresh()
             }
         },
     },

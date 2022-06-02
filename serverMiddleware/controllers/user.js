@@ -87,6 +87,25 @@ exports.user = function(req, res) {
   );
 }
 
+exports.myUser = function(req, res) {
+  User.findOne({
+    where:{ id: req.auth.userId},
+    //attributes:['id','name','email']
+  })
+  .then(
+    (user) => {
+     return res.json(user)
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        message:"Erreur lors de la récupération de l'user"
+      });
+    }
+  );
+}
+
+
 exports.getAllUser = function(req, res){
   User.findAll({
     where: {
@@ -147,7 +166,10 @@ exports.deleteUser = (req, res, next) => {
         } else {
           User.destroy({
               where: {
-                  id: req.params.id
+                  id: req.params.id,
+                  isAdmin: {
+                    [Op.ne]: 2
+                  }
               }
           }).then( // supression de la sauce 
             () => {

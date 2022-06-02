@@ -13,9 +13,12 @@ const authent = require('../middleware/auth');
 router.post('/signup',emailValid, passValid, userCtrl.signup);
 // Route login 
 router.post('/login',emailValid, passValid, userCtrl.login);
-// Route user
+// Route user pour middleware auth
 router.get('/user', authent, userCtrl.user);
+// Route delete User
 router.delete('/user/:id', authent, userCtrl.deleteUser);
+// Route user recupère ses données
+router.get('/myuser', authent, userCtrl.myUser);
 
 
 module.exports = router;

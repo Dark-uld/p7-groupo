@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`users` (
 	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`email` VARCHAR(250) NOT NULL COLLATE 'utf8mb3_general_ci',
 	`name` VARCHAR(250) NOT NULL COLLATE 'utf8mb3_general_ci',
-	`datebirth` DATE NULL DEFAULT NULL,
 	`password` VARCHAR(250) NOT NULL COLLATE 'utf8mb3_general_ci',
 	`isAdmin` INT(1) NULL DEFAULT '0',
 	`createdAt` TIMESTAMP NULL DEFAULT NULL,
