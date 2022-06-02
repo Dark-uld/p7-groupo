@@ -49,7 +49,7 @@ export default {
             this.$axios.put( '/comments/' + event.srcElement.id , {
                 postid: this.$route.params.id,
                 content: this.content,
-                userid:this.$auth.user.id,
+                userid:this.$auth.user.decoded.id,
             })
             .then((response) => {
                 console.log("Commentaire Modifié")

@@ -5,7 +5,6 @@
       <h1> Liste des posts</h1>
       <div>
           <nuxt-link to="/posts/newpost">Créer un nouveau post</nuxt-link>
-          <button @click="userState()">User</button>
       </div>
       <div>
         <div v-if="posts.length>0">
@@ -18,8 +17,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import store from '~/store/index'
 
 export default {
     middleware:'auth'
@@ -37,11 +34,6 @@ export default {
     created(){
     },
     methods:{
-        userState(value){
-            let user = value
-        console.log(user.hasScope('isAdmin'));
-        },
-
     },
     async asyncData(context){
         const {data} = await  context.$axios.get('/posts')
@@ -49,9 +41,6 @@ export default {
         return {
             posts : data
         }
-    },
-    async fetch() {
-        await this.$store.dispatch('fetchUser', this.$auth.user.id)
     },
 }
 </script>

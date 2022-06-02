@@ -14,7 +14,7 @@ router.post('/signup',emailValid, passValid, userCtrl.signup);
 // Route login 
 router.post('/login',emailValid, passValid, userCtrl.login);
 // Route user
-router.get('/user', userCtrl.user);
+router.get('/user', authent, userCtrl.user);
 //Route récup donnée de l'user
 router.get('/user/:id', userCtrl.getUser)
 router.delete('/user/:id', authent, userCtrl.deleteUser);

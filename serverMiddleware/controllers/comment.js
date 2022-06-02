@@ -2,33 +2,6 @@ const Comment = require ('../models/Comment');
 const Post = require ('../models/Post');
 const User = require ('../models/User');
 
-exports.getAllComment = (req, res, next ) => {
-  
-
-    Comment.findAll({ 
-      include: [{
-        model: User,
-        required: true,
-        attributes:['name']
-       },],
-       order: [ [ 'createdAt', 'DESC' ]]
-       ,
-       where: {
-        postid: req.params.id
-      }
-    })
-    .then(
-      (comments) => {
-        res.status(200).json(comments);
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
-};
 
 exports.createComment = (req, res, next) => {
   const comment = Comment.create({

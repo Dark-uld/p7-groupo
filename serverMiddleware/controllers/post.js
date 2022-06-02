@@ -36,14 +36,25 @@ exports.getAllPost = (req, res, next ) => {
 };
 
 exports.getOnePost = (req, res, next) => {
-    Post.findAll({where: {
+    Post.findOne({where: {
         id: req.params.id
     },
     include: [{
-      model: User,
-      required: true,
-      attributes:['name']
-     }]
+        model: User,
+        required: true,
+        attributes:['name']
+      },
+      {
+        model: Comment,
+        required: false,
+        attributes:['id','userid','content','createdAt','updatedAt'],
+        include: [{
+          model: User,
+          required: true,
+          attributes:['name']
+        }]
+      },
+     ]
   }).then( 
       (post) => {
         res.status(200).json(post);

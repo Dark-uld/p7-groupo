@@ -58,7 +58,7 @@ export default {
       this.$axios.put( '/posts/' + this.$route.params.id, {
           title: this.title,
           content: this.content,
-          userid:this.$auth.user.id
+          userid:this.$auth.user.decoded.id
         })
         .then((response) => {
             this.$router.push({ name:'posts', params:{ updated:'yes', id: this.$route.params.id } })

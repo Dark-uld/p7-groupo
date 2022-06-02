@@ -57,7 +57,7 @@ exports.login = (req, res, next) => {
 
 exports.user = function(req, res) {
   var token = req.headers.authorization
-  if (token) {
+  /*if (token) {
     // verifies secret and checks if the token is expired
     jwt.verify(token.replace(/^Bearer\s/, ''),  process.env.secretToken, function(err, decoded) {
       if (err) {
@@ -69,7 +69,34 @@ exports.user = function(req, res) {
   }
   else{
     return res.status(401).json({message: 'unauthorized'})
-  }
+  }*/
+  User.findOne({
+    where:{ id: req.auth.userId},
+    attributes: ['isAdmin']
+  })
+  .then(
+    (user) => {
+      if (token) {
+        // verifies secret and checks if the token is expired
+        jwt.verify(token.replace(/^Bearer\s/, ''),  process.env.secretToken, function(err, decoded) {
+          if (err) {
+            return res.status(401).json({message: 'unauthorized'})
+          } else {
+            return res.json({ user: {decoded, isAdmin: user.isAdmin } })
+          }
+        });
+      }
+      else{
+        return res.status(401).json({message: 'unauthorized'})
+      }
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        message:"Erreur lors de la récupération de l'user"
+      });
+    }
+  );
 }
 
 exports.getUser = function(req, res){

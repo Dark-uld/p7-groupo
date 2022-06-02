@@ -43,7 +43,7 @@ export default {
       this.$axios.post( '/posts', {
           title: this.title,
           content: this.content,
-          userid:this.$auth.user.id
+          userid:this.$auth.user.decoded.id
         })
         .then((response) => {
           console.log(response)

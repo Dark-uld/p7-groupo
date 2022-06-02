@@ -7,7 +7,7 @@
         <div class='app-flex-row'>
             <div v-if="$auth.loggedIn">
                 <nuxt-link  class='app-navbar' to="/posts">Home</nuxt-link>
-                <nuxt-link class='app-navbar' to="/admin">AdminPage</nuxt-link>
+                <nuxt-link class='app-navbar' to="/admin" v-if="$auth.user.isAdmin">AdminPage</nuxt-link>
                 <nuxt-link  class='app-navbar' to="/logout" >Logout</nuxt-link>
             </div>
             <div  v-if="!$auth.loggedIn">
@@ -23,12 +23,6 @@
 
 <script>
 export default {
-    computed: {
-        userCon(){
-            return this.$store.state.userCon
-        }
-    },
-    
 }
 </script>
 

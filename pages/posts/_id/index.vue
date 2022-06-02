@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="app-post-container">
-            <h1>{{post[0].title}} </h1>
+            <h1>{{post.title}} </h1>
             <div class="app-post-head">
-                <div class="app-post-name">Posté par {{post[0].User.name}} </div> 
-                <div class="app-post-date">le {{newDate(post[0].createdAt)}}</div>
+                <div class="app-post-name">Posté par {{post.User.name}} </div> 
+                <div class="app-post-date">le {{newDate(post.createdAt)}}</div>
             </div>
             <div>
-                {{post[0].content}}
-                <div v-if="`${post[0].createdAt}` != `${post[0].updatedAt}`"> Modifié le {{newDate(post[0].updatedAt)}}</div>
+                {{post.content}}
+                <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
             </div>
-            <div v-if="`${post[0].userid}`==`${$auth.user.id}`">
-                <nuxt-link  :to="`/posts/${post[0].id}/modifypost`">Modifier</nuxt-link>
+            <div v-if="`${post.userid}`==`${$auth.user.id}`">
+                <nuxt-link  :to="`/posts/${post.id}/modifypost`">Modifier</nuxt-link>
                 <button @click="deleteRecord()">Delete</button>
             </div>
             <hr/>
@@ -31,9 +31,9 @@
             <hr/>
             <hr/>
             <div>
-                <div v-if="!`${comments}`">No Comment</div>
+                <div v-if="!`${post.Comments}`">No Comment</div>
                 <div v-else>
-                    <Comments :comments="comments"/>
+                    <Comments :comments="post.Comments"/>
                 </div>
             </div>
         </div>
@@ -46,10 +46,10 @@ import axios from 'axios'
 export default {
     head(){
         return {
-            title: this.post[0].title,
+            title: this.post.title,
             meta: [{
                 name: 'description',
-                content: `Ce post a été créé par ${this.post[0].User.name}`,
+                content: `Ce post a été créé par ${this.post.User.name}`,
                 hid: 'description'
             }]
         }
@@ -82,7 +82,7 @@ export default {
             this.$axios.post( '/comments', {
                 postid: this.$route.params.id,
                 content: this.content,
-                userid:this.$auth.user.id
+                userid:this.$auth.user.decoded.id
                 })
                 .then((response) => {
                 console.log("Commentaire Créé")
@@ -98,19 +98,13 @@ export default {
         
     },
     async asyncData(context){
-        const [postRes,comRes] = await Promise.all([
-            
-            context.$axios.get('/posts/'+ context.route.params.id),
-           context.$axios.get('/comments/'+ context.route.params.id)
-            
-        ])
+        const {data} = await context.$axios.get('/posts/'+ context.route.params.id)
         return {
-            post : postRes.data,
-            comments: comRes.data
+            post : data
         }
     },
     async fetch() {
-        await this.$store.dispatch('fetchUser', this.$auth.user.id)
+        await this.$store.dispatch('fetchUser', this.$auth.user.decoded.id)
     }
 
 }

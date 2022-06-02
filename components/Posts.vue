@@ -63,7 +63,7 @@ export default {
             if(!alreadyLiked){
                 this.$axios.post( '/likes', {
                         postid: value,
-                        userid:this.$auth.user.id
+                        userid:this.$auth.user.decoded.id
                 })
                 .then((response) => {
                    this.$store.dispatch('fetchLikes')
@@ -86,7 +86,7 @@ export default {
             let listLikes = this.$store.state.postLiked
             let postAlreadyLiked=false
             for(let i=0; i<listLikes.length; i++){
-                if(listLikes[i].postid == value && listLikes[i].userid == this.$auth.user.id ){
+                if(listLikes[i].postid == value && listLikes[i].userid == this.$auth.user.decoded.id ){
                     postAlreadyLiked=true
                 }
             }

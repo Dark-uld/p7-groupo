@@ -1,3 +1,3 @@
-export default function ({store, redirect}) {
-   if (!store.state.userCon.isAdmin) return redirect('/posts')
+export default function ({$auth, redirect}) {
+   if ($auth.user.isAdmin!=1) return redirect('/posts')
 }
