@@ -8,7 +8,7 @@
                     <div class="app-post-date">{{newDate(post.createdAt)}}</div>
                 </div>
                 <div>{{post.title}}</div>
-                <div v-if="post.url" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
+                <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
                     <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
                         <article class="preview-content app-center">
                         <div class="preview-img-container" v-if="post.urlImage">

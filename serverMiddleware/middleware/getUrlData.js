@@ -5,9 +5,10 @@ import { getLinkPreview, getPreviewFromContent } from "link-preview-js"
 module.exports = (req, res, next) => {
     getLinkPreview(
         req.body.content, {
-            timeout: 2000
+            timeout: 3000
         }
     ).then(resp => {
+        console.log(resp)
         if(resp.mediaType == "image"){
             req.urlData = {
                 url:resp.url,
@@ -25,7 +26,12 @@ module.exports = (req, res, next) => {
         }
         return next();
     }).catch(err => {
-        // something went wrong
-        console.log(err.response.status)
+        req.urlData = {
+            url:"",
+            title:"",
+            desc:"",
+            images:"",
+        }
+        next()
     })
 };
