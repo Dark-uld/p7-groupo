@@ -46,7 +46,7 @@ export default {
             if(confirm("Êtes-vous sûr de vouloir supprimer ce compte ?") === true){
                  this.$axios.delete( '/admin/user/' + value)
                 .then((response) => {
-                    this.$nuxt.refresh()
+                    window.location.reload(true)
                 })
                 .catch( (error) => {
                     console.log(error)
@@ -65,7 +65,7 @@ export default {
                     }
                  )
                 .then((response) => {
-                    this.$nuxt.refresh()
+                    window.location.reload(true)
                 })
                 .catch( (error) => {
                     console.log(error)
@@ -75,7 +75,7 @@ export default {
                 });
             } else {
                 alert("Erreur lors de la modification du rang de l'utilisateur")
-                this.$nuxt.refresh()
+                window.location.reload(true)
             }
         },
     },
