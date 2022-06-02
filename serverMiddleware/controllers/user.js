@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require ('../models/User');
 const sequelize = require('../utils/database');
+const { Op } = require("sequelize");
 
 
 // ENREGISTREMENT DE NOVUEAU UTILISATEUR
@@ -57,19 +58,6 @@ exports.login = (req, res, next) => {
 
 exports.user = function(req, res) {
   var token = req.headers.authorization
-  /*if (token) {
-    // verifies secret and checks if the token is expired
-    jwt.verify(token.replace(/^Bearer\s/, ''),  process.env.secretToken, function(err, decoded) {
-      if (err) {
-        return res.status(401).json({message: 'unauthorized'})
-      } else {
-        return res.json({ user: decoded })
-      }
-    });
-  }
-  else{
-    return res.status(401).json({message: 'unauthorized'})
-  }*/
   User.findOne({
     where:{ id: req.auth.userId},
     attributes: ['isAdmin']
@@ -99,26 +87,13 @@ exports.user = function(req, res) {
   );
 }
 
-exports.getUser = function(req, res){
-  User.findOne({
-    where:{ id: req.params.id },
-    attributes: ['id', 'name','email','isAdmin']
-  })
-  .then(
-    (user) => {
-      res.status(200).json(user);
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        message:"Erreur lors de la récupération de l'user"
-      });
-    }
-  );
-}
-
 exports.getAllUser = function(req, res){
   User.findAll({
+    where: {
+        isAdmin: {
+            [Op.ne]: 2
+        }
+    },
     attributes: ['id', 'name','email','isAdmin','createdAt','updatedAt']
   })
   .then(
@@ -138,14 +113,25 @@ exports.modifyUser = function(req, res){
   User.update({
     isAdmin: req.body.isAdmin
     },
-    { where: {id: req.params.id} })
+    { where: 
+      {
+        id: req.params.id,
+        isAdmin: {
+          [Op.ne]: 2
+        }
+      }
+      
+     })
   .then(() => res.status(200).json({ message: 'Utilisateur Modifié !'}))
   .catch(error => res.status(400).json({ error }));
 }
 
 exports.deleteUser = (req, res, next) => {
   User.findAll({where: {
-    id: req.params.id
+    id: req.params.id,
+    isAdmin: {
+      [Op.ne]: 2
+    }
   }})
   .then(
       (user) => {

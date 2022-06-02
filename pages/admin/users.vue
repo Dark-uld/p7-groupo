@@ -3,10 +3,7 @@
         <h2>
             Liste des utilisateurs
         </h2>
-        <div class="app-post app-flex-col" v-for="(user,index) in users"  :key="index">
-            {{user.id}}//{{user.name}}//{{user.email}}//{{newDate(user.createdAt)}}//{{newDate(user.updatedAt)}}
-
-        </div>
+        <PremUser :users="users"/>
     </div>
 </template>
 <script>
