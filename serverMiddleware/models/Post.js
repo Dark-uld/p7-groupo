@@ -22,19 +22,28 @@ const Post = sequelize.define('Post', {
         type: Sequelize.TEXT,
         allowNull: false
     },
+    url: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
+    
+    urlTitle: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
+    
+    urlDesc: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
+    
+    urlImage: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
 
   
 });
-
-/* Post.associate = (User)=>{
-    Post.belongsTo(User, {
-        foreignKey: {
-            allowNull: false,
-            name:'id'
-        }
-    })
-    
-};*/
 
 User.hasMany(Post)
 Post.belongsTo(User)

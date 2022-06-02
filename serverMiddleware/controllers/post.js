@@ -6,7 +6,11 @@ exports.createPost = (req, res, next) => {
   const post = Post.create({
       title: req.body.title,
       content: req.body.content,
-      userid: req.body.userid
+      userid: req.body.userid,
+      url: req.urlData.url,
+      urlDesc: req.urlData.desc,
+      urlTitle: req.urlData.title,
+      urlImage: req.urlData.images,
     })
     return post
     .then((post) => res.status(201).json({ message: 'Post créé !', id: post._id }))
@@ -71,7 +75,11 @@ exports.getOnePost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
     Post.update({
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        url: req.urlData.url,
+        urlDesc: req.urlData.desc,
+        urlTitle: req.urlData.title,
+        urlImage: req.urlData.images,
         },
         { where: {id: req.params.id} }) // modification de la sauce
       .then(() => res.status(200).json({ message: 'Objet modifié !'}))

@@ -10,7 +10,7 @@
                 {{post.content}}
                 <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
             </div>
-            <div v-if="`${post.userid}`==`${$auth.user.id}`">
+            <div v-if="`${post.userid}`==`${$auth.user.decoded.id}`">
                 <nuxt-link  :to="`/posts/${post.id}/modifypost`">Modifier</nuxt-link>
                 <button @click="deleteRecord()">Delete</button>
             </div>

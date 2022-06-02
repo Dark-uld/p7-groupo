@@ -25,6 +25,10 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`posts` (
 	`content` TEXT NOT NULL COLLATE 'utf8mb3_general_ci',
 	`createdAt` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
 	`updatedAt` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+	`url` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`urlTitle` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`urlDesc` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`urlImage` TEXT NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `FK_posts_users` (`userid`) USING BTREE,
 	CONSTRAINT `FK_posts_users` FOREIGN KEY (`userid`) REFERENCES `groupomania`.`users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE

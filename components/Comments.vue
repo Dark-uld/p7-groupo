@@ -10,7 +10,7 @@
                     {{comment.content}}
                     <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`"> Modifié le {{newDate(comment.updatedAt)}}</div>
                 </div>
-                <div v-if="`${comment.userid}`==`${$auth.user.id}`">
+                <div v-if="`${comment.userid}`==`${$auth.user.decoded.id}`">
                     <button v-on:click="showForm(comment.id)">Modifier</button>
                     <form :id="`${comment.id}`" action=""
                     method="put"

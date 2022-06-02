@@ -8,10 +8,21 @@
                     <div class="app-post-date">{{newDate(post.createdAt)}}</div>
                 </div>
                 <div>{{post.title}}</div>
+                <div v-if="post.url" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
+                    <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
+                        <article class="preview-content app-center">
+                        <div class="preview-img-container" v-if="post.urlImage">
+                            <img :src="post.urlImage" alt="preview de l'article" class="preview-img"/>
+                        </div>
+                        <div v-if="post.urlTitle || post.urlDesc">
+                            <h2 class="preview-title app-olap" v-if="`${post.urlTitle}`">{{post.urlTitle}}</h2>
+                            <div class="preview-desc  app-olap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
+                        </div>
+                        
+                        </article>
+                    </a>
+                </div>
                 <div>
-                    <div v-if="`${retrieveUrl(post.content)}`" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
-                        {{linkPreview(post.content,post.id)}}
-                    </div>
                     {{post.content}}
 
                     <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
@@ -41,8 +52,6 @@
 
 <script>
 import newDate from '~/utils/newDate'
-import retrieveUrl from '~/utils/retrieveUrl'
-import linkPreview from '~/utils/linkPreview'
 import axios from 'axios'
 import store from '~/store/index'
 export default {
@@ -55,8 +64,6 @@ export default {
     },
     methods: {
         newDate,
-        retrieveUrl,
-        linkPreview,
         // fonction  like et dislike le post
         handleLiking(value, check) {
             let alreadyLiked = check
