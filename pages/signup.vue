@@ -36,8 +36,10 @@
             <div id="passError" class="app-err"></div>
           </div>
 
-          <input type="submit" value="Créer le compte" class="app-but app-butValid">
-          <nuxt-link to="/" class="app-but app-butCancel">Cancel</nuxt-link>
+          <div class="flex justify-around">
+            <input type="submit" value="Créer le compte" class="app-but app-butValid">
+            <nuxt-link to="/" class="app-but app-butCancel">Cancel</nuxt-link>
+          </div>
 
         </form>
   </div>

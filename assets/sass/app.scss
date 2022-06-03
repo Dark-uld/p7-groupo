@@ -99,31 +99,39 @@ ul {
         margin: 4px 2px;
         -webkit-transition-duration: 0.4s; /* Safari */
         transition-duration: 0.4s;
+        transition: transform 0.2s;
         cursor: pointer;
     }
+    
+    &-but:hover{
+        transform: scale(1.04);
+        color: white;
+    }
 
-    &-butValid {
+    &-but:focus{
+        transform: scale(1.07);
+    }
+
+    &-butValid{
         background-color: white; 
         font-weight: 500;
         color: black; 
         border: 2px solid #EF4444;
     }
     
-    &-butValid:hover {
+    &-butValid:hover{
         background-color: #EF4444;
-        color: white;
     }
 
     
-    &-butCancel {
+    &-butCancel{
         background-color: white;
         color: black;
         border: 2px solid #555555;
     }
 
-    &-butCancel:hover {
+    &-butCancel:hover{
         background-color: #555555;
-        color: white;
     }
     
     // Formulaire

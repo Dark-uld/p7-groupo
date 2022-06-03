@@ -1,44 +1,42 @@
 <template>
-  <div class="app-main app-flex-col app-center">
-    <div class="app-main-box">
-        <h1 class="app-title text-redter">Se connecter</h1>
-        <hr>
+  <div class="app-body">
+    <form action="" class="app-form"
+    method="post"
+    @submit.prevent="submitForm()">
+      <h1>Se connecter</h1>
+      <div class="app-flex-col app-formCat">
+        <label for="userMail" class="flex app-center">Votre email</label>
+        <input id="userMail" type="text" class="flex text-center app-formInp"
+          :class="{ 'is-invalid': errors && errors.email }"
+          v-model="email"
+          @change="verifMail()"
+          aria-label="email">
+        <div id="mailError" class="app-err"></div>
+      </div>
 
-    
+      <div class="app-flex-col app-formCat">
+        <label for="userPass" class="flex app-center">Votre mot de passe</label>
+        <input id="userPass" type="password" class="flex text-center app-formInp"
+          :class="{ 'is-invalid': errors && errors.password }"
+          v-model="password"
+          @change="verifPass()"
+          aria-label="password">
+        <div id="passError" class="app-err"></div>
+      </div>
+      
+      <div class="flex justify-around">
+        <input type="submit" value="Login" class="app-but app-butValid">
+        <nuxt-link to="/" class="app-but app-butCancel">Cancel</nuxt-link>
+      </div>
 
-        <div class="">
-            <div class="">
-                <form action=""
-                method="post"
-                @submit.prevent="submitForm()">
-
-                <div class="">
-                    <label for="email">Email</label>
-                    <input type="text" class=""
-                    :class="{ 'is-invalid': errors && errors.email }"
-                    v-model="email"/>
-                </div>
-
-                <div class="">
-                    <label for="password">Password</label>
-                    <input type="password" class=""
-                    :class="{ 'is-invalid': errors && errors.password }"
-                    v-model="password"/>
-                    
-                </div>
-                
-
-                <input type="submit" value="Login" class="">
-                <nuxt-link to="/" class="">Cancel</nuxt-link>
-
-                </form>
-            </div>
-        </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
+import verifMail from "~/utils/verifierMail"
+import verifPass from "~/utils/verifierPass"
+
 export default {
   middleware: 'auth',
   auth: 'guest',
@@ -52,6 +50,8 @@ export default {
     }
   },
   methods:{
+    verifMail,
+    verifPass,
     submitForm(){
       this.$auth.loginWith('local', {
           data: {
