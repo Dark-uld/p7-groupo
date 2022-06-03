@@ -3,7 +3,7 @@
       <div v-if="$route.params.created=='yes'">Post créé !</div>
       <div v-if="$route.params.deleted=='yes'">Post supprimé !</div>
       <h1> Liste des posts</h1>
-      <div>
+      <div class="flex justify-center">
           <nuxt-link to="/posts/newpost" class="app-but app-butValid">Créer un nouveau post</nuxt-link>
       </div>
       <div class="flex">

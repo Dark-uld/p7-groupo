@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <div class="app-post app-flex-col" v-for="(post,index) in posts"  :key="index">
             <div class="app-post-container">
                 <div class="app-post-name">{{post.User.name}} </div> 

@@ -5,15 +5,15 @@ html, body {
 } 
 
 h1{
-    @apply text-2xl font-black text-center mb-5 ;
+    @apply text-4xl font-black text-center mb-5 ;
 }
 
 h2{
-    @apply  text-xl font-extrabold ;
+    @apply  text-2xl font-extrabold ;
 }
 
 h3{
-    @apply   text-lg  font-extrabold ;
+    @apply   text-xl  font-extrabold ;
 }
 
 ul {
@@ -165,30 +165,23 @@ ul {
         height:auto;
         border: 1px solid black;
         border-radius: 5px;
-        padding: 20px 10px;
+        padding: 10px 5px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
         overflow: hidden;
         align-items: flex-start;
+        gap:5px;
 
         &-container {
-            max-width:588px;
+            max-width:100%;
             min-width:238px;
-            line-height: 20px;
-            overflow: hidden;
-            flex-wrap: wrap;
+            padding:5px;
         }
 
         &-head {
             display: flex;
-            flex: row;
             padding: 5px 0;
         }
 
-        &-name {
-            font-weight: 600;
-            width: fit-content;
-            margin-right: 10px;
-        }
 
         &-date {
             width: fit-content;
