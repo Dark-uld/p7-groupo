@@ -51,6 +51,16 @@ import verifMail from "~/utils/verifierMail"
 import verifPass from "~/utils/verifierPass"
 
 export default {
+  head(){
+      return {
+          title:'Créer votre compte',
+          meta: [{
+              name: 'description',
+              content: "Créer votre compte Groupomania pour rejoindre la communauté de nos employés",
+              hid: 'description'
+          }]
+      }
+  },
   middleware: 'auth',
   auth: 'guest',
   data(){

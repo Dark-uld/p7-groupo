@@ -5,7 +5,7 @@ html, body {
 } 
 
 h1{
-    @apply text-2xl font-black text-center ;
+    @apply text-2xl font-black text-center mb-5 ;
 }
 
 h2{
@@ -158,28 +158,24 @@ ul {
     }
 
     &-post {
-        width: 500px;
-        height: auto;
+        box-sizing: content-box;
+        max-width:90%;
+        min-width:250px;
+        min-height:130px;
+        height:auto;
         border: 1px solid black;
         border-radius: 5px;
-        padding: 10px 5px;
+        padding: 20px 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        align-items: flex-start;
 
-        &-bord {
-            width : 60px;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        &-logo {
-            width : 50px;
-            height: 50px;
-            border: 0.5px solid black;
-        }
         &-container {
-            width:450px;
+            max-width:588px;
+            min-width:238px;
             line-height: 20px;
+            overflow: hidden;
+            flex-wrap: wrap;
         }
 
         &-head {
@@ -201,26 +197,5 @@ ul {
     }
 
 
-    // page index
-    &-main {
-       @apply  w-full min-h-full ;
-
-       &-box{
-           // max width de 1280px
-           @apply max-w-7xl ;
-       }
-       &-menu{
-          height: 100px;
-       }
-
-       &-btn{
-           padding: 10px;
-           border: 1px solid #ef4444;
-           text-align: center;
-           font-weight: 600;
-           border-radius: 15px;
-           width: 250px;
-       }
-    }
 }
 

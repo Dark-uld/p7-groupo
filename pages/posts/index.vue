@@ -1,15 +1,13 @@
 <template>
-<div>
+<div class="app-body">
       <div v-if="$route.params.created=='yes'">Post créé !</div>
       <div v-if="$route.params.deleted=='yes'">Post supprimé !</div>
       <h1> Liste des posts</h1>
       <div>
-          <nuxt-link to="/posts/newpost">Créer un nouveau post</nuxt-link>
+          <nuxt-link to="/posts/newpost" class="app-but app-butValid">Créer un nouveau post</nuxt-link>
       </div>
-      <div>
-        <div v-if="posts.length>0">
-          <Posts :posts="posts"/>
-        </div>
+      <div class="flex">
+        <Posts :posts="posts" v-if="posts.length>0"/>
         <div v-if="posts.length==0">Pas de post</div>
       </div>
 </div>

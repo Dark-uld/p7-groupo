@@ -38,6 +38,16 @@ import verifMail from "~/utils/verifierMail"
 import verifPass from "~/utils/verifierPass"
 
 export default {
+  head(){
+    return {
+        title:'Connectez vous',
+        meta: [{
+            name: 'description',
+            content: "Connectez vous à votre compte Groupomania pour rejoindre la communauté de nos employés",
+            hid: 'description'
+        }]
+    }
+  },
   middleware: 'auth',
   auth: 'guest',
   data(){
