@@ -85,7 +85,6 @@ ul {
     &-olap{
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
     }
     // composants
     &-but{
@@ -179,6 +178,7 @@ ul {
 
         &-head {
             display: flex;
+            flex-wrap: wrap;
             padding: 5px 0;
         }
 

@@ -30,13 +30,13 @@
                         </div>
                         <div v-if="post.urlTitle || post.urlDesc">
                             <h3 class="preview-title app-olap" v-if="`${post.urlTitle}`">{{post.urlTitle}}</h3>
-                            <div class="preview-desc  app-olap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
+                            <div class="preview-desc  app-olap whitespace-nowrap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
                         </div>
                         
                         </article>
                     </a>
                 </div>
-                <div class="max-w-xl">
+                <div class="max-w-xl app-olap">
                     {{post.content}}
 
                     <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
