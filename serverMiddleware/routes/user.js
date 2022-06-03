@@ -8,11 +8,13 @@ const emailValid = require('../middleware/emailValide');
 const passValid = require('../middleware/passValide');
 // middleware pour proteger la route
 const authent = require('../middleware/auth');
+const formValid = require('../middleware/formValidation');
+
 
 // Route création de compte
-router.post('/signup',emailValid, passValid, userCtrl.signup);
+router.post('/signup',formValid.mailValide, formValid.passValide, userCtrl.signup);
 // Route login 
-router.post('/login',emailValid, passValid, userCtrl.login);
+router.post('/login',formValid.mailValide, formValid.passValide, userCtrl.login);
 // Route user pour middleware auth
 router.get('/user', authent, userCtrl.user);
 // Route delete User

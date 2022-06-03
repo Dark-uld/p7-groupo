@@ -6,7 +6,6 @@ const postRoutes = require('./routes/posts');
 const commentRoutes = require('./routes/comments');
 const likeRoutes = require('./routes/likes');
 const adminRoutes = require('./routes/admin');
-const path = require('path');
 
 
 // INSTALLATION EXPRESS
@@ -35,9 +34,6 @@ app.use("/posts", postRoutes);
 app.use('/comments', commentRoutes);
 app.use('/likes', likeRoutes);
 app.use('/admin', adminRoutes);
-
-
-// app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 module.exports = {

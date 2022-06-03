@@ -45,7 +45,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    ['cookie-universal-nuxt', { SameSite: 'true' }]
   ],
   auth: {
     strategies: {
@@ -64,10 +65,12 @@ export default {
                     propertyName: 'user'
                 }
             },
+            
             token: {
                 required: true,
                 type: "Bearer"
             },
+            
         }
     },
     redirect: {

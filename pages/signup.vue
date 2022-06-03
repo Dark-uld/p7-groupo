@@ -1,48 +1,53 @@
 <template>
-  <div>
-    <h1>Créer un nouveau compte</h1>
-    <hr>
-
-    <div >
-      <div >
-        <form action=""
+  <div class="app-body">
+        <form action="" class="app-form"
           method="post"
-          @submit.prevent="submitForm()">
-
-          <div >
-            <label for="">Name</label>
-            <input type="text" class="form-control"
+          @submit.prevent="submitForm(verifName(),verifMail(),verifPass())">
+          <h1>Créer un nouveau compte</h1>
+          <div class="app-flex-col app-formCat">
+            <label for="userName" class="flex app-center">Votre nom
+            </label>
+            <input id="userName" type="text" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.name }"
-              v-model="name">
+              v-model="name"
+              @change="verifName()"
+              aria-label="nom">
+            <div id="nameError" class="app-err"></div>
            
           </div>
 
-          <div >
-            <label for="">Email</label>
-            <input type="text" 
+          <div class="app-flex-col app-formCat">
+            <label for="userMail" class="flex app-center">Votre email</label>
+            <input id="userMail" type="text" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.email }"
-              v-model="email">
-            
+              v-model="email"
+              @change="verifMail()"
+              aria-label="email">
+            <div id="mailError" class="app-err"></div>
           </div>
 
-          <div >
-            <label for="">Password</label>
-            <input type="password" class="form-control"
+          <div class="app-flex-col app-formCat">
+            <label for="userPass" class="flex app-center">Votre mot de passe</label>
+            <input id="userPass" type="password" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.password }"
-              v-model="password">
-            
+              v-model="password"
+              @change="verifPass()"
+              aria-label="password">
+            <div id="passError" class="app-err"></div>
           </div>
 
-          <input type="submit" value="Register">
-          <nuxt-link to="/" >Cancel</nuxt-link>
+          <input type="submit" value="Créer le compte" class="app-but app-butValid">
+          <nuxt-link to="/" class="app-but app-butCancel">Cancel</nuxt-link>
 
         </form>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import verifName from "~/utils/verifierName"
+import verifMail from "~/utils/verifierMail"
+import verifPass from "~/utils/verifierPass"
+
 export default {
   middleware: 'auth',
   auth: 'guest',
@@ -56,7 +61,13 @@ export default {
     }
   },
   methods:{
-    submitForm(){
+    verifName,
+    verifMail,
+    verifPass,
+    submitForm(fct1, fct2 ,fct3){
+      if(fct1 + fct2 + fct3 >0){
+        return alert("Formulaire incomplet ou incorrect")
+      }
       this.$axios.post( 'http://localhost:3000/api/auth/signup', {
           name: this.name,
           email: this.email,
@@ -78,12 +89,10 @@ export default {
           }
         })
         .catch( (error) => {
-          console.log(error)
-          if(error.response.data.errors){
-            this.errors = error.response.data.errors
-          }
+          alert("Données du formulaire incorrect ou incomplet")
         });
-    }
+    },
   }
 }
 </script>
+

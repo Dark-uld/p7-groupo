@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 html, body {
-  @apply font-roboto;
-}
+  @apply font-roboto  text-base font-medium ;
+} 
 
 h1{
-    @apply text-2xl font-bold ;
+    @apply text-2xl font-black text-center ;
+}
+
+h2{
+    @apply  text-xl font-extrabold ;
+}
+
+h3{
+    @apply   text-lg  font-extrabold ;
 }
 
 ul {
@@ -14,7 +22,10 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 0;
-  }
+}
+
+
+
 
 .app {
     // display flex
@@ -36,7 +47,13 @@ ul {
     &-jaic{
         @apply justify-around items-center ;
     }
+    // html 
 
+    &-body {
+        @apply max-w-screen-2xl mx-auto my-0 px-5 py-7 ;
+
+    }
+    
     &-header {
         @apply px-8 py-5 w-full flex flex-row items-center bg-red-500 justify-between ;
     }
@@ -50,7 +67,7 @@ ul {
     }
 
     &-title {
-        @apply px-5 py-6 text-3xl font-bold ;
+        @apply px-5 py-6 text-3xl font-extrabold ;
     }
 
     &-rounded{
@@ -60,14 +77,77 @@ ul {
     &-navbar {
         @apply px-1 ;
     }
+    
+    &-err{
+        @apply font-bold text-red-700 text-sm ;
+    }
 
     &-olap{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+    // composants
+    &-but{
+        background-color: white;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    &-butValid {
+        background-color: white; 
+        font-weight: 500;
+        color: black; 
+        border: 2px solid #EF4444;
+    }
     
+    &-butValid:hover {
+        background-color: #EF4444;
+        color: white;
+    }
+
     
+    &-butCancel {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+    }
+
+    &-butCancel:hover {
+        background-color: #555555;
+        color: white;
+    }
+    
+    // Formulaire
+    &-form {
+        margin: 0px auto;
+        padding: 10px 20px;
+        width: 100%;
+        max-width: 448px;
+        background: white;
+        border-radius: 4px;
+        box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+    }
+
+    &-formCat{
+        margin: 15px 0;
+    }
+    
+    &-formInp{
+        border:none;
+        border-bottom: 0.125rem solid black;
+        background-color: rgb(226 232 240);
+        height: 45px;
+        padding: 5px 7px;
+    }
 
     &-post {
         width: 500px;
