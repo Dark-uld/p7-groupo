@@ -1,5 +1,5 @@
 <template>
-    <div class="app-flex-row flex-wrap max-w-full items-start  justify-center gap-5 py-10">
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3.5 justify-items-center items-center">
     
         <div class="app-post app-flex-row" v-for="(post,index) in posts"  :key="index">
             <div class="app-flex-col">
