@@ -1,31 +1,42 @@
 <template>
-    <div>
+    <div class="app-body">
         <div class="app-post-container">
             <h1>{{post.title}} </h1>
-            <div class="app-post-head">
-                <div class="app-post-name">Posté par {{post.User.name}} </div> 
-                <div class="app-post-date">le {{newDate(post.createdAt)}}</div>
-            </div>
-            <div>
-                {{post.content}}
-                <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
-            </div>
             <div v-if="`${post.userid}`==`${$auth.user.decoded.id}`">
-                <nuxt-link  :to="`/posts/${post.id}/modifypost`">Modifier</nuxt-link>
-                <button @click="deleteRecord()">Delete</button>
+                <nuxt-link  :to="`/posts/${post.id}/modifypost`"  class="app-but app-butValid">Modifier</nuxt-link>
+                <button @click="deleteRecord()" class="app-but app-butCancel">Delete</button>
+            </div>
+            <div class="mb-5">
+                <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
+                    <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
+                        <article class="app-preview-content app-center">
+                            <div v-if="post.urlImage">
+                                <img :src="post.urlImage" alt="Image app-preview de l'article" class="app-preview-img"/>
+                            </div>
+                            <div v-if="post.urlTitle || post.urlDesc">
+                                <h2 class="app-preview-title app-olap" v-if="`${post.urlTitle}`">{{post.urlTitle}}</h2>
+                                <div class="app-preview-desc  app-olap whitespace-nowrap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+                <div class="app-flex-col">
+                    <div class="max-w-full " v-html="getUrl(post.content, post.id)" ></div>
+                    <div v-if="`${post.createdAt}` != `${post.updatedAt}`" class="text-sm"> Modifié le {{newDate(post.updatedAt)}}</div>
+                </div>
+
             </div>
             <hr/>
             <hr/>
-
-            <div>
+            <div class="mb-5">
                 <form action=""
                 method="post"
                 @submit.prevent="submitForm()">
                     <div>
-                        <label for="">Envoyez un commentaire</label>
-                        <input type="text" v-model="content">
+                        <label for="comment">Envoyez un commentaire</label>
+                        <input id="comment" type="text" v-model="content" class="app-formCom" placeholder="Ajouter un commentaire">
                     </div>
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Commentez"  class="app-but app-butCom app-butValid">
                 </form>
             </div>
             <hr/>
@@ -43,6 +54,8 @@
 <script>
 import newDate from '~/utils/newDate'
 import axios from 'axios'
+import getUrl from '~/utils/getUrl'
+
 export default {
     head(){
         return {
@@ -67,6 +80,7 @@ export default {
     },
     methods: {
         newDate,
+        getUrl,
         deleteRecord(){
             if(confirm("Êtes-vous sure?") === true){
                 this.$axios.delete('/posts/' + this.$route.params.id)
@@ -103,9 +117,6 @@ export default {
             post : data
         }
     },
-    async fetch() {
-        await this.$store.dispatch('fetchUser', this.$auth.user.decoded.id)
-    }
 
 }
 </script>

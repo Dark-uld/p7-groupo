@@ -3,11 +3,11 @@
     
         <div class="app-post app-flex-row" v-for="(post,index) in posts"  :key="index">
             <div class="app-flex-col">
-                    <button v-if="!checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))" >
-                        <img src="/images/icons/icons8-heart-20.png" alt="Ajouter un like"/>
+                    <button  v-if="!checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))">
+                        <img class="app-like" src="/images/icons/icons8-heart-20.png" alt="Ajouter un like"  tabindex="-1"/>
                     </button>
-                    <button v-if="checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))">
-                        <img src="/images/icons/icons8-heartfilled-20.png" alt="Retirer un like"/>
+                    <button  v-if="checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))">
+                        <img class="app-like" src="/images/icons/icons8-heartfilled-20.png" alt="Retirer un like"  tabindex="-1"/>
                     </button>
                     <div class="ml-1">{{ postLikes(post.id) }}</div>
             </div>
@@ -17,22 +17,22 @@
                     <div class="mr-1.5">Posté par {{post.User.name}} </div> 
                     <div>le {{newDate(post.createdAt)}}</div>
                 </div>
-                <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="preview-link app-flex-col app-center"> 
+                <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
                     <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
-                        <article class="preview-content app-center">
-                        <div class="preview-img-container" v-if="post.urlImage">
-                            <img :src="post.urlImage" alt="preview de l'article" class="preview-img"/>
+                        <article class="app-preview-content app-center">
+                        <div v-if="post.urlImage">
+                            <img :src="post.urlImage" alt="Image app-preview de l'article" class="app-preview-img"/>
                         </div>
                         <div v-if="post.urlTitle || post.urlDesc">
-                            <h3 class="preview-title app-olap" v-if="`${post.urlTitle}`">{{post.urlTitle}}</h3>
-                            <div class="preview-desc  app-olap whitespace-nowrap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
+                            <h3 class="app-preview-title app-olap" v-if="`${post.urlTitle}`">{{post.urlTitle}}</h3>
+                            <div class="app-preview-desc  app-olap whitespace-nowrap" v-if="`${post.urlDesc}`">{{post.urlDesc}}</div>
                         </div>
                         
                         </article>
                     </a>
                 </div>
                 <div class="max-w-xl app-olap" v-html="getUrl(post.content, post.id)" ></div>
-                <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
+                <div v-if="`${post.createdAt}` != `${post.updatedAt}`" class="text-xs"> Modifié le {{newDate(post.updatedAt)}}</div>
                 <div class="flex justify-around">
                     <div class="flex items-center"> {{pluriel(post.Comments.length)}}</div>
                     <nuxt-link :to="`/posts/${post.id}`" class="app-but app-butValid">Voir plus</nuxt-link>
@@ -133,30 +133,4 @@ export default {
 </script>
 
 <style lang="scss">
-.preview {
-    &-link{
-        width:100%;
-        max-width:550px;
-        padding: 2%;
-        border: 1px solid black;
-        border-radius: 10px;
-        margin: 0 auto;
-    }
-    &-content{
-        width:96%;
-    }
-    &-preview-img-container{
-
-    }
-    &-title{
-        
-    }
-    &-desc{
-
-    }
-}
-
-.liked{
-    filter: invert(34%) sepia(56%) saturate(1832%) hue-rotate(334deg) brightness(103%) contrast(87%);
-}
 </style>

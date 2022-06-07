@@ -1,27 +1,27 @@
 <template>
     <div>
-        <div class="app-post" v-for="(comment,index) in comments" :key="`${comment.id}`">
+        <div class="app-com" v-for="(comment,index) in comments" :key="`${comment.id}`">
             <div class="app-post-container">
-                <div class="app-post-head">
+                <div class="app-post-head italic">
                     <div class="app-post-name">Par {{comment.User.name}}</div> 
                     <div class="app-post-date">&nbsp le {{newDate(comment.createdAt)}}</div>
                 </div>
                 <div>
                     {{comment.content}}
-                    <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`"> Modifié le {{newDate(comment.updatedAt)}}</div>
-                </div>
+                    <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`" class="text-sm"> Modifié le {{newDate(comment.updatedAt)}}</div>
+                </div> 
                 <div v-if="`${comment.userid}`==`${$auth.user.decoded.id}`">
-                    <button v-on:click="showForm(comment.id)">Modifier</button>
+                    <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butValid" >Modifier</button>
                     <form :id="`${comment.id}`" action=""
                     method="put"
                     @submit.prevent="modifyComment()"
                     hidden>
                         <div>
-                            <label for="comContent">Modifier le commentaire</label>
-                            <input type="text" v-model="content" id="comContent" value="lol">
+                            <label :for="`comCont${comment.id}`">Modifier le commentaire</label>
+                            <input type="text" v-model="content" :id="`comCont${comment.id}`" value="`${comment.content}`" class="app-formCom" >
                         </div>
-                        <input type="submit" value="Valider" >
-                        <button v-on:click="showForm(comment.id)">Annuler</button>
+                        <input type="submit" value="Valider" class="app-but app-butCom app-butValid " >
+                        <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butCancel" >Annuler</button>
                     </form>
                     <!-- <button>Supprimer</button> -->
                 </div>
@@ -53,7 +53,7 @@ export default {
             })
             .then((response) => {
                 console.log("Commentaire Modifié")
-                location.reload()
+                this.$nuxt.refresh()
             })
             .catch( (error) => {
                 console.log(error)

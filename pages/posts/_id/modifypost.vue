@@ -1,23 +1,25 @@
 <template>
-    <div>
+    <div  class="app-body">
         <h1> Modifier le post</h1>
-        <div >
+        <div class="app-form">
         <form action=""
           method="post"
           @submit.prevent="submitForm()">
+         
+         
 
-          <div >
-            <label for="title">Titre</label>
-            <input type="text" v-model="title" value="`${post.title}`" >
+          <div  class="app-flex-col app-formCat">
+            <label for="title"  class="flex app-center">Titre</label>
+            <input id="title"  type="text" v-model="title"  aria-label="titre du nouveau post" class="flex text-center app-formInp"  value="`${post.title}`" >
           </div>
 
-          <div >
-            <label for="content">Contenu du post</label>
-            <input type="text" v-model="content" value="`${post.content}`" >
+          <div  class="app-flex-col app-formCat">
+            <label for="content"  class="flex app-center">Contenu du post</label>
+            <input id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp"  value="`${post.content}`">
           </div>
 
-          <input type="submit" value="Mise à Jour">
-          <nuxt-link to="/" >Cancel</nuxt-link>
+          <input type="submit" value="Mise à Jour"  class="app-but app-butValid">
+          <nuxt-link to="/" class="app-but app-butCancel">Cancel</nuxt-link>
 
         </form>
       </div>

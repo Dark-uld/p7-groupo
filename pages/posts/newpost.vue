@@ -1,23 +1,24 @@
 <template>
-    <div>
+    <div class="app-body">
         <h1> Créer un nouveau post</h1>
         <div >
         <form action=""
+          class="app-form"
           method="post"
           @submit.prevent="submitForm()">
 
-          <div >
-            <label for="">Titre</label>
-            <input type="text" v-model="title">
+          <div  class="app-flex-col app-formCat">
+            <label for="title"  class="flex app-center">Titre</label>
+            <input id="title"  type="text" v-model="title"  aria-label="titre du nouveau post" class="flex text-center app-formInp">
           </div>
 
-          <div >
-            <label for="">Contenu du post</label>
-            <input type="text" v-model="content">
+          <div  class="app-flex-col app-formCat">
+            <label for="content"  class="flex app-center">Contenu du post</label>
+            <input id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp">
           </div>
 
-          <input type="submit" value="Register">
-          <nuxt-link to="/" >Cancel</nuxt-link>
+          <input type="submit" value="Créer un post" class="app-but app-butValid">
+          <nuxt-link to="/"  class="app-but app-butCancel">Cancel</nuxt-link>
 
         </form>
       </div>
@@ -40,6 +41,10 @@ export default {
   },
   methods:{
     submitForm(){
+      if(!this.title  && this.content) return alert("Il manque un titre")
+      if(this.title  && !this.content )  return alert("Il manque du contenu")
+      if(!this.title && !this.content) return alert("Il manque un titre et du contenu")
+
       this.$axios.post( '/posts', {
           title: this.title,
           content: this.content,
@@ -51,7 +56,7 @@ export default {
           
         })
         .catch( (error) => {
-          alert(error)
+            console.log(error)
         });
     }
   }

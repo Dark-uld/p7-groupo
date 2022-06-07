@@ -52,11 +52,13 @@ exports.getOnePost = (req, res, next) => {
         model: Comment,
         required: false,
         attributes:['id','userid','content','createdAt','updatedAt'],
+        order: [ [ 'id', 'DESC' ]],
         include: [{
           model: User,
           required: true,
           attributes:['name']
-        }]
+        }],
+        
       },
      ]
   }).then( 

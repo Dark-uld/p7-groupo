@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+
 html, body {
   @apply font-roboto  text-base font-medium ;
 } 
@@ -29,6 +30,8 @@ ul {
 
 .app {
     // display flex
+    @apply h-screen flex flex-col	;
+
     &-flex {
         &-row{
             @apply flex flex-row ;
@@ -55,11 +58,15 @@ ul {
     }
     
     &-header {
-        @apply px-8 py-5 w-full flex flex-row items-center bg-red-500 justify-between ;
+        @apply px-8 py-5 w-full flex flex-row items-center justify-between ;
+    }
+
+    &-footer{
+        @apply px-8 py-5 w-full flex mt-auto	 ;
     }
 
     &-logo {
-        @apply w-24 h-24 ;
+        @apply w-20 h-20 ;
     }
 
     &-container {
@@ -74,8 +81,19 @@ ul {
         @apply rounded-full ;
     }
 
-    &-navbar {
-        @apply px-1 ;
+    &-navitem {
+        @apply py-0.5 px-1.5 bg-white rounded-full text-black justify-evenly items-center h-9 transition-transform w-36 ;
+
+        &:hover{
+            transform: scale(1.06);
+        }
+        &:focus{
+            transform: scale(1.06);
+        }
+    }
+
+    &-navicon{
+        @apply w-6 h-6 mr-1 ;
     }
     
     &-err{
@@ -86,7 +104,13 @@ ul {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    &-updated{
+        font-size: 12px;
+        font-style: italic;
+    }
     // composants
+
+    // composants button
     &-but{
         background-color: white;
         border: none;
@@ -100,6 +124,9 @@ ul {
         transition-duration: 0.4s;
         transition: transform 0.2s;
         cursor: pointer;
+    }
+    &-butCom{
+        padding: 3px 6px !important;
     }
     
     &-but:hover{
@@ -133,7 +160,7 @@ ul {
         background-color: #555555;
     }
     
-    // Formulaire
+    // composants Formulaire
     &-form {
         margin: 0px auto;
         padding: 10px 20px;
@@ -153,9 +180,18 @@ ul {
         border-bottom: 0.125rem solid black;
         background-color: rgb(226 232 240);
         height: 45px;
-        padding: 5px 7px;
+        padding: 3px 5px;
     }
 
+    &-formCom{
+        border:none;
+        border-bottom: 0.125rem solid black;
+        background-color: rgb(226 232 240);
+        height: 30px;
+        width:100%;
+        padding: 3px 5px;
+    }
+    // composants Post
     &-post {
         box-sizing: content-box;
         max-width:100%;
@@ -187,6 +223,58 @@ ul {
             width: fit-content;
         }
         
+    }
+
+    // composants Like
+    &-like{
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        transition: transform 0.2s;
+        cursor: pointer;
+
+        &:focus{
+            transform: scale(1.1);
+        }
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+
+    // composants Preview
+
+    &-preview {
+        &-link{
+            width:100%;
+            max-width:550px;
+            padding: 2%;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin: 10px auto;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            transition: transform 0.2s;
+            cursor: pointer;
+
+            &:hover{
+                transform: scale(1.02);
+            }
+        }
+        &-content{
+            width:96%;
+        }
+        &-img{
+            border-radius: 10px;
+        }
+    }
+
+    &-com{
+        box-sizing: content-box;
+        width:100%;
+        height:auto;
+        padding: 10px 5px;
+        overflow: hidden;
+        align-items: flex-start;
+        gap:5px;
     }
 
 }
