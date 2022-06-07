@@ -60,7 +60,7 @@ exports.user = function(req, res) {
   var token = req.headers.authorization
   User.findOne({
     where:{ id: req.auth.userId},
-    attributes: ['isAdmin']
+    attributes: ['isAdmin','name']
   })
   .then(
     (user) => {
@@ -70,7 +70,7 @@ exports.user = function(req, res) {
           if (err) {
             return res.status(401).json({message: 'unauthorized'})
           } else {
-            return res.json({ user: {decoded, isAdmin: user.isAdmin } })
+            return res.json({ user: {decoded, isAdmin: user.isAdmin, name: user.name } })
           }
         });
       }

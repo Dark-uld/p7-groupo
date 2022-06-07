@@ -10,7 +10,7 @@
             <input id="userName" type="text" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.name }"
               v-model="name"
-              @change="verifName()"
+              @input="verifName()"
               aria-label="nom">
             <div id="nameError" class="app-err"></div>
            
@@ -21,7 +21,7 @@
             <input id="userMail" type="text" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.email }"
               v-model="email"
-              @change="verifMail()"
+              @input="verifMail()"
               aria-label="email">
             <div id="mailError" class="app-err"></div>
           </div>
@@ -31,7 +31,7 @@
             <input id="userPass" type="password" class="flex text-center app-formInp"
               :class="{ 'is-invalid': errors && errors.password }"
               v-model="password"
-              @change="verifPass()"
+              @input="verifPass()"
               aria-label="password">
             <div id="passError" class="app-err"></div>
           </div>

@@ -158,7 +158,7 @@ ul {
 
     &-post {
         box-sizing: content-box;
-        max-width:90%;
+        max-width:100%;
         min-width:250px;
         min-height:130px;
         height:auto;
@@ -171,7 +171,7 @@ ul {
         gap:5px;
 
         &-container {
-            max-width:100%;
+            width:100%;
             min-width:238px;
             padding:5px;
         }

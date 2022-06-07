@@ -1,18 +1,13 @@
 <template>
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3.5 justify-items-center items-center">
+    <div class="app-flex-col gap-8 max-w-full align-center">
     
         <div class="app-post app-flex-row" v-for="(post,index) in posts"  :key="index">
             <div class="app-flex-col">
                     <button v-if="!checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" aria-label="bouton pour like" >
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                        </svg>
-                        
+                        <img src="/images/icons/icons8-heart-20.png" alt="Ajouter un like"/>
                     </button>
                     <button v-if="checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" aria-label="bouton pour retirer like"  >
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
+                        <img src="/images/icons/icons8-heartfilled-20.png" alt="Retirer un like"/>
                     </button>
                     <div class="ml-1">{{ postLikes(post.id) }}</div>
             </div>
@@ -36,12 +31,10 @@
                         </article>
                     </a>
                 </div>
-                <div class="max-w-xl app-olap">
-                    {{post.content}}
-
-                    <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
-                </div>
-                <div class="flex justify-end">
+                <div class="max-w-xl app-olap" v-html="getUrl(post.content, post.id)" ></div>
+                <div v-if="`${post.createdAt}` != `${post.updatedAt}`"> Modifié le {{newDate(post.updatedAt)}}</div>
+                <div class="flex justify-around">
+                    <div class="flex items-center"> {{pluriel(post.Comments.length)}}</div>
                     <nuxt-link :to="`/posts/${post.id}`" class="app-but app-butValid">Voir plus</nuxt-link>
                 </div>    
             </div>
@@ -54,6 +47,8 @@
 import newDate from '~/utils/newDate'
 import axios from 'axios'
 import store from '~/store/index'
+import pluriel from '~/utils/pluriel'
+import getUrl from '~/utils/getUrl'
 export default {
     
     middleware: 'auth',
@@ -63,7 +58,12 @@ export default {
         }
     },
     methods: {
+        // modifie la date dans un format lisible
         newDate,
+        // verifie le nombre de commentaire et retourne un texte correspondant
+        pluriel,
+        //Verifie si le contenu contient une url et renvoie un texte correspondant
+        getUrl,
         // fonction  like et dislike le post
         handleLiking(value, check) {
             let alreadyLiked = check
@@ -154,5 +154,9 @@ export default {
     &-desc{
 
     }
+}
+
+.liked{
+    filter: invert(34%) sepia(56%) saturate(1832%) hue-rotate(334deg) brightness(103%) contrast(87%);
 }
 </style>
