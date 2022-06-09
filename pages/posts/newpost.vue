@@ -14,7 +14,7 @@
 
           <div  class="app-flex-col app-formCat">
             <label for="content"  class="flex app-center">Contenu du post</label>
-            <input id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp">
+            <textarea id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp app-formText"></textarea>
           </div>
 
           <input type="submit" value="Créer un post" class="app-but app-butValid">
@@ -52,7 +52,8 @@ export default {
         })
         .then((response) => {
           console.log(response)
-          this.$router.push({ name:'posts', params:{ created:'yes' } })
+          this.$router.push({ name:'posts'})
+          alert("Nouveau post créé")
           
         })
         .catch( (error) => {

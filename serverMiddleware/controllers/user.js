@@ -19,11 +19,11 @@ exports.signup = (req, res, next) => {
             age: req.body.age
             })
             .then(result => res.status(201).json({ message: 'utilisateur créé', _id: result.id}))
-            .catch(error => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({  error : "Email déjà existant ou données contient des caractères interdits" }));
             
         }
         )
-        .catch(error => res.status(400).json({ error : "meme pas hash" }));
+        .catch(error => res.status(400).json({ error : "Problème lors du hash" }));
         
 };
 

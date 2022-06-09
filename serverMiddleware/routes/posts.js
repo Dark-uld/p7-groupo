@@ -12,7 +12,7 @@ const postCtrl = require ('../controllers/post');
 //const likeCtrl = require ('../controllers/like')
 
 // Route Affichage de toutes les posts
-router.get('/', authent, postCtrl.getAdminPost);
+router.get('/', authent, postCtrl.getAllPost);
 // Route Creation d'un post
 router.post('/', authent, getUrl, postCtrl.createPost);
 // Route Affichage d'un post

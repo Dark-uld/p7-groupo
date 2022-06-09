@@ -62,3 +62,26 @@ exports.deleteComment = (req, res, next) => {
     )
   .catch(error => res.status(400).json({ error: new Error('Problème lors de la suppression!') }));
 }
+
+exports.getAllCom = (req, res, next ) => {
+  Comment.findAll({ 
+    include: [{
+      model: User,
+      required: true,
+      attributes:['name']
+     },
+    ],
+     order: [ [ 'createdAt', 'DESC' ]]
+  })
+    .then(
+      (coms) => {
+        res.status(200).json(coms);
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        });
+      }
+    );
+};

@@ -1,16 +1,28 @@
 <template>
-    <div >
-        <div class="app-post app-flex-col" v-for="(post,index) in posts"  :key="index">
-            <div class="app-post-container">
-                <div class="app-post-name">{{post.User.name}} </div> 
-                <div>{{post.title}}</div>
-                <div>{{post.content}}</div>
-                <div class="app-post-date">{{newDate(post.createdAt)}}</div>
-                <div>{{newDate(post.updatedAt)}}</div>
-                <button @click="deletePost(post.id)">Supprimer</button>
-            </div>
-            <PremCom :comments="post.Comments"/>
-        </div>
+    <div class="app-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Post Id</th>
+                    <th>Créé par</th>
+                    <th>Contenu</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  v-for="(post,index) in posts"  :key="index">
+                    <td> {{post.id}}</td>
+                    <td>{{post.User.name}}</td>
+                    <td><div class="app-tableContent">{{post.content}}</div></td>
+                    <td>{{newDate(post.createdAt)}}</td>
+                    <td>{{newDate(post.updatedAt)}}</td>
+                    <td><button @click="deletePost(post.id)" class="app-but app-butCancel">Supprimer</button></td>
+                </tr>
+            </tbody>          
+        </table>
+            
     </div>
         
 </template>
@@ -33,6 +45,7 @@ export default {
             if(confirm("Êtes-vous sure?") === true){
                  this.$axios.delete( '/admin/posts/' + value)
                 .then((response) => {
+                     alert("Post Supprimé")
                     this.$nuxt.refresh()
                 })
                 .catch( (error) => {

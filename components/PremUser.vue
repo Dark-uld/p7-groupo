@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app-table">
         <table>
             <thead>
                 <tr>
@@ -18,11 +18,11 @@
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>
-                    <input type="number" name="isAdmin" min="0" max="1" :value="user.isAdmin" :id="`quantity${user.id}`">
+                    <input type="number" name="isAdmin" min="0" max="1" :value="user.isAdmin" :id="`quantity${user.id}`" aria-label="Choisir valeur isAdmin" placeholder="isAdmin">
                     </td>
                     <td>{{newDate(user.createdAt)}}</td>
-                    <td><button @click="modifyUser(user.id)">Modifier</button></td>
-                    <td><button @click="deleteUser(user.id)">Supprimer</button></td>
+                    <td><button @click="modifyUser(user.id)" class="app-but app-butValid">Modifier</button></td>
+                    <td><button @click="deleteUser(user.id)" class="app-but app-butCancel">Supprimer</button></td>
                 </tr>
             </tbody>          
         </table>
@@ -46,6 +46,7 @@ export default {
             if(confirm("Êtes-vous sûr de vouloir supprimer ce compte ?") === true){
                  this.$axios.delete( '/admin/user/' + value)
                 .then((response) => {
+                     alert("Utlisateur Supprimé")
                     window.location.reload(true)
                 })
                 .catch( (error) => {
@@ -65,6 +66,7 @@ export default {
                     }
                  )
                 .then((response) => {
+                     alert("Utilisateur Modifié")
                     window.location.reload(true)
                 })
                 .catch( (error) => {
@@ -74,7 +76,7 @@ export default {
                     }
                 });
             } else {
-                alert("Erreur lors de la modification du rang de l'utilisateur")
+                alert("Valeurs isAdmin admises : 1(admin) ou 0(normal user) uniquement")
                 window.location.reload(true)
             }
         },

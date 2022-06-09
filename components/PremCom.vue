@@ -1,15 +1,27 @@
 <template>
-    <div>
-    lol
-     <div class="app-post" v-for="(comment,index) in comments" :key="`${comment.id}`">
-            <div class="app-post-container">
-                <div class="app-post-name">{{comment.User.name}} </div>
-                <div> {{comment.content}}</div>
-                <div class="app-post-date">{{newDate(comment.createdAt)}}</div>
-                <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`">{{newDate(comment.updatedAt)}}</div>
-                <button :id="`${comment.id}`" v-on:click="deleteComment()">Supprimer</button>
-            </div>
-        </div>
+    <div class="app-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Com Id</th>
+                    <th>Créé par</th>
+                    <th>Contenu</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  v-for="(comment,index) in comments"  :key="index">
+                    <td> {{comment.id}}</td>
+                    <td>{{comment.User.name}}</td>
+                    <td><div class="app-tableContent">{{comment.content}}</div></td>
+                    <td>{{newDate(comment.createdAt)}}</td>
+                    <td>{{newDate(comment.updatedAt)}}</td>
+                    <td><button @click="deleteCom(comment.id)" class="app-but app-butCancel">Supprimer</button></td>
+                </tr>
+            </tbody>          
+        </table>
     </div>
         
 </template>
@@ -20,11 +32,11 @@ export default {
     middleware:'auth',
     methods: {
         newDate,
-        deleteComment(){
-            console.log( event.srcElement.id)
-            this.$axios.delete( '/admin/comment/' + event.srcElement.id)
+        deleteCom(value){
+            if(confirm("Êtes-vous sure?") === true){
+                this.$axios.delete( '/admin/comment/' + value)
             .then((response) => {
-                console.log("Commentaire Supprimé")
+                alert("Commentaire Supprimé")
                 this.$nuxt.refresh()
             })
             .catch( (error) => {
@@ -33,6 +45,8 @@ export default {
                     this.errors = error.response.data.errors
                 }
             });
+            }
+            
         }
     },
     props:{
@@ -43,7 +57,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-
-</style>

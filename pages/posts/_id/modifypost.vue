@@ -15,7 +15,7 @@
 
           <div  class="app-flex-col app-formCat">
             <label for="content"  class="flex app-center">Contenu du post</label>
-            <input id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp"  value="`${post.content}`">
+            <textarea id="content"  type="text" v-model="content" aria-label="contenu du nouveau post" class="flex text-center app-formInp app-formText"  value="`${post.content}`"></textarea>
           </div>
 
           <input type="submit" value="Mise à Jour"  class="app-but app-butValid">
@@ -63,7 +63,8 @@ export default {
           userid:this.$auth.user.decoded.id
         })
         .then((response) => {
-            this.$router.push({ name:'posts', params:{ updated:'yes', id: this.$route.params.id } })
+            this.$router.push({ name:'posts'})
+            alert("Post modifié")
         })
         .catch( (error) => {
           console.log(error)

@@ -85,7 +85,8 @@ export default {
             if(confirm("Êtes-vous sure?") === true){
                 this.$axios.delete('/posts/' + this.$route.params.id)
                 .then((response) => {
-                    this.$router.push({ name:'posts', params:{ deleted:'yes' } })
+                    this.$router.push({ name:'posts'})
+                    alert("Post supprimé")
                 })
                 .catch( (error) => {
                     console.log(error);

@@ -96,12 +96,13 @@ export default {
                 }
               })
               .catch( (error) => {
-                console.log(error)
+                 alert('Erreur lors de la connection au compte')
               })
           }
         })
         .catch( (error) => {
-          alert("Données du formulaire incorrect ou incomplet")
+          console.log(error.data)
+            alert("Problème lors de la création du compte")
         });
     },
   }

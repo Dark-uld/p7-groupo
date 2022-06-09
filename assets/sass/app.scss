@@ -6,11 +6,11 @@ html, body {
 } 
 
 h1{
-    @apply text-4xl font-black text-center mb-5 ;
+    @apply text-4xl font-black text-center my-5 ;
 }
 
 h2{
-    @apply  text-2xl font-extrabold ;
+    @apply  text-2xl font-extrabold my-3 ;
 }
 
 h3{
@@ -23,6 +23,19 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 0;
+}
+
+table, th, td {
+    border: 1px solid;
+    padding: 4px;
+}
+
+th, td{
+    max-width:500px;
+}
+
+td input{
+    width: 40px;
 }
 
 
@@ -191,6 +204,10 @@ ul {
         width:100%;
         padding: 3px 5px;
     }
+    &-formText{
+        height: 150px !important;
+    }
+
     // composants Post
     &-post {
         box-sizing: content-box;
@@ -275,6 +292,21 @@ ul {
         overflow: hidden;
         align-items: flex-start;
         gap:5px;
+    }
+
+    //Page Admin 
+
+    &-table{
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+    }
+
+    &-tableContent{
+        white-space: normal !important;
+        overflow-y: scroll;
+        max-height:100px;
     }
 
 }

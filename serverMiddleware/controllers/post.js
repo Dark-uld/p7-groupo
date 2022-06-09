@@ -18,14 +18,20 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllPost = (req, res, next ) => {
-    Post.findAll({ 
-      include: [{
-        model: User,
-        required: true,
-        attributes:['name']
-       }],
-       order: [ [ 'createdAt', 'DESC' ]]
-    })
+  Post.findAll({ 
+    include: [{
+      model: User,
+      required: true,
+      attributes:['name']
+     },
+     {
+      model: Comment,
+      required: false,
+      attributes:['id'],
+     },
+    ],
+     order: [ [ 'createdAt', 'DESC' ]]
+  })
     .then(
       (posts) => {
         res.status(200).json(posts);

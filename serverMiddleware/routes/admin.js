@@ -9,9 +9,11 @@ const comCtrl = require ('../controllers/comment');
 const authent = require('../middleware/auth');
 const isAdmin = require('../middleware/isAdmin');
 
-// Route Récuperer liste de tout les users
+// Route Récuperer liste de tout les users, posts, commentaires
 router.get('/users', authent, isAdmin, userCtrl.getAllUser);
-router.get('/posts', authent, isAdmin, postCtrl.getAdminPost)
+router.get('/posts', authent, isAdmin, postCtrl.getAdminPost);
+router.get('/comments', authent, isAdmin, comCtrl.getAllCom);
+
 // Route pour modifier un user
 router.put('/user/:id', authent, isAdmin, userCtrl.modifyUser);
 // Route pour supprimer un user

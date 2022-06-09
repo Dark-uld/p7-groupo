@@ -1,18 +1,18 @@
 <template>
     <div>
         <h2>
-            Liste des posts
+            Liste des commentaires
         </h2>
-        <PremPost :posts="posts"/>
+        <PremCom :comments="comments"/>
     </div>
 </template>
 <script>
 export default {
     async asyncData(context){
-        const {data} = await  context.$axios.get('/admin/posts')
+        const {data} = await  context.$axios.get('/admin/comments')
         
         return {
-            posts : data
+            comments : data
         }
     },
 }
