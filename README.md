@@ -1,4 +1,4 @@
-# groupomania
+# P7-Groupomania, par R.Pirathepan
 
 ## Build Setup
 

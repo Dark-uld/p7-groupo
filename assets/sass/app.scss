@@ -66,7 +66,7 @@ td input{
     // html 
 
     &-body {
-        @apply max-w-screen-2xl mx-auto my-0 px-5 py-7 ;
+        @apply max-w-screen-2xl mx-auto my-0 px-5 py-7 w-full  ;
 
     }
     
@@ -76,6 +76,7 @@ td input{
 
     &-footer{
         @apply px-8 py-5 w-full flex mt-auto	 ;
+
     }
 
     &-logo {
@@ -108,6 +109,32 @@ td input{
     &-navicon{
         @apply w-6 h-6 mr-1 ;
     }
+
+    &-bar1, &-bar2, &-bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: black;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    .change &-bar1  {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
+      
+    .change &-bar2 {opacity: 0;}
+      
+    .change &-bar3  {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+    }
+
+    .change &-navbar {
+        transform: scaleY(1);
+        transform-origin: top;
+        display:flex;
+    }
     
     &-err{
         @apply font-bold text-red-700 text-sm ;
@@ -134,9 +161,12 @@ td input{
         display: inline-block;
         margin: 4px 2px;
         -webkit-transition-duration: 0.4s; /* Safari */
-        transition-duration: 0.4s;
-        transition: transform 0.2s;
+        transition: transform 0.4s;
         cursor: pointer;
+
+        &-menu{
+            display:none !important;
+        }
     }
     &-butCom{
         padding: 3px 6px !important;
@@ -309,5 +339,97 @@ td input{
         max-height:100px;
     }
 
+    //Page Logout
+
+    &-logout{  
+        position: absolute;
+        background-color:white;
+        width:100%;
+        height:100%;
+        display: flex;
+        justify-content:center;
+        top:0px;
+        animation: loaded 1s forwards;
+    }
+
+    &-loading {
+        width:100px;
+        height: 100px;
+        margin-top: 150px;
+        animation: spin 1s;
+    }
+    
+     
+
 }
+
+@keyframes spin { 
+    0%{
+        -webkit-transform: rotate(0deg); 
+        transform:rotate(0deg); 
+    }
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    }
+} 
+
+@keyframes loaded { 
+    0%{
+        opacity: 1;
+    }
+    99%{
+        transform:scale(1)
+    }
+    100% {
+        transform:scale(0)
+    }
+} 
+
+
+@media only screen and (max-width: 768px) {
+    .app{
+        &-header{
+            display: flex;
+            flex-direction: column;
+        }
+        &-but{
+            &-menu{
+                display: inline-block !important;
+            }
+        }
+
+        &-navContainer{
+            width: 100%;
+        }
+        &-navbar{
+                display:none;
+                width: 100%;
+                gap:0px;
+                margin-top: 20px;
+        }
+
+        &-navbar li {
+            width: 100%;
+        }
+
+        &-navitem{
+            justify-content: center;
+            width: 100%;
+            border-radius: 0px;
+        }
+
+        &-navitem:hover{
+            background-color: #EEEEEE;
+            transform: scale(1) !important;
+            border-bottom: 2px solid black;
+        }
+        &-navitem:focus{
+            background-color: #EEEEEE;
+            transform: scale(1) !important;
+            border-bottom: 2px solid black;
+        }
+    }
+}
+
 

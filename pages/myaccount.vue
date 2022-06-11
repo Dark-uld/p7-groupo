@@ -1,11 +1,11 @@
 <template>
 
-<div> 
-    Mon compte  
-    <div>
-        <div>Mon nom: <span> {{user.name}}</span></div>
-        <div>Mon mail: <span> {{user.email}}</span></div>
-        <button v-if="!($auth.user.isAdmin==2)" @click="deleteAccount()">Supprimer le compte</button>
+<div class="app-body"> 
+    <h1>Mon compte</h1>  
+    <div class="app-form app-flex-col justify-center">
+        <div class="app-flex-col app-formCat">Mon nom: <span> {{user.name}}</span></div>
+        <div class="app-flex-col app-formCat">Mon mail: <span> {{user.email}}</span></div>
+        <button v-if="!($auth.user.isAdmin==2)" @click="deleteAccount()" class="app-but app-butCancel">Supprimer le compte</button>
     </div>
     
 </div>

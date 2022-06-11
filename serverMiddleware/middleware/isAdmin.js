@@ -12,8 +12,12 @@ module.exports = (req, res, next) => {
                     isAdmin: user.isAdmin
                 }
                 return next();
-            } 
-            throw 'User Not Admin';
+            } else {
+                res.status(403).json({
+                    error: 'Not an Admin!'
+                  });
+            }
+            
         })
     } catch (error){
         res.status(403).json({

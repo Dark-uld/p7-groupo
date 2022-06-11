@@ -1,5 +1,11 @@
 <template>
-  <div class="app-body">
+  <div class="app-body relative">
+    <div class="app-logout" z-index="50">
+        <img class="app-loading"src="/images/icons/icons8-loading-100.png"/>
+    </div>
+
+
+    <h1>Logging out</h1>
     <form action="" class="app-form"
     method="post"
     @submit.prevent="submitForm()">

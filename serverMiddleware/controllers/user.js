@@ -159,7 +159,6 @@ exports.deleteUser = (req, res, next) => {
             error: new Error('No such User!')
           });
         } else if (user[0].id != req.auth.userId && !req.utilisateur.isAdmin) { // si id créateur correspond pas à l'id user qui requete ou pas un admin
-          console.log('lol')
           res.status(400).json({
             error: new Error('Unauthorized request!')
           });
@@ -188,7 +187,7 @@ exports.deleteUser = (req, res, next) => {
         
       }
     )
-  .catch(error => res.status(400).json({ error: error.message}));
+  .catch(error => res.status(400).json({  error: new Error('Unauthorized request!')}));
 }
 
 

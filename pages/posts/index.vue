@@ -1,15 +1,17 @@
 <template>
-<div class="app-body">
-     
-      <h1> Bienvenue {{$auth.user.name}} <br> sur le réseau d'actualités des employés Groupomania</h1>
-      <div class="app-flex-row justify-center">
+<div class="app-body relative">
+    <div class="app-logout" z-index="50">
+        <img class="app-loading"src="/images/icons/icons8-loading-100.png"/>
+    </div>
+    <h1> Bienvenue {{$auth.user.name}} <br> sur le réseau d'actualités des employés Groupomania</h1>
+    <div class="app-flex-row justify-center">
 
         <nuxt-link to="/posts/newpost" class="app-but app-butValid">Créer un nouveau post</nuxt-link>
-      </div>
-      <div class="flex py-8 justify-center">
+    </div>
+    <div class="flex py-8 justify-center">
         <Posts :posts="posts" v-if="posts.length>0"/>
         <div v-if="posts.length==0">Pas de post</div>
-      </div>
+    </div>
 </div>
      
 </template>

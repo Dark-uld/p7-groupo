@@ -1,8 +1,10 @@
-<!--<template>
-  <div>
-    <h1 v-if="error.statusCode === 404">Page not found</h1>
+<template>
+  <div class="app-body app-flex-col items-center">
+    <h1 v-if="error.statusCode === 404">Error 404 <br>Page not found</h1>
     <h1 v-else>An error occurred</h1>
-    <NuxtLink to="/">Home page</NuxtLink>
+    <NuxtLink to="/" class="app-but app-butValid w-36">Page d'accueil</NuxtLink>
+    <img src="/images/error.webp" class="max-w-750"/>
+    
   </div>
 </template>
 

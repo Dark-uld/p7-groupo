@@ -1,13 +1,17 @@
 <template>
 <div class="app">
-    <div>
+    
     <header class="app-header bg-redprim">
-        <div>
+        <div class="app-flex-row justify-between w-full">
             <nuxt-link to="/" aria-label="Vers la page d'accueil" title="Vers la page d'accueil"><img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded" alt="Logo de Groupomania"></nuxt-link>
+            <button :class="['app-but','app-but-menu','block', {'change': toggled}]" @click="showMenu" aria-label="Show Menu">
+                    <div class="app-bar1" index="-1"></div>
+                    <div class="app-bar2" index="-1"></div>
+                    <div class="app-bar3" index="-1"></div>
+            </button>
         </div>
-        <div>
-        </div>
-        <div> 
+        <div :class="['app-navContainer',{'change': toggled}]" >
+            
             <ul v-if="$auth.loggedIn" class="app-navbar gap-1 flex md:flex-row flex-col">
                 <li>
                     <nuxt-link  class='app-navitem app-flex-row ' to="/posts" aria-label="Vers la page d'accueil" title="Vers la page d'accueil"> 
@@ -56,14 +60,17 @@
         </div>
     </header>
     <nuxt/>
-    </div>
+    
     
     <footer class="app-footer bg-redprim app-flex-col app-center">
-        <div>Groupamania ©2022 </div>
-        <div class="app-flex-row">
-            <div>Create icon by <a target="_blank" href="https://icons8.com">Icons8</a></div>
-            // 
-            <div>Contactez le support</div>
+        <div class="mb-4">Groupamania ©2022 </div>
+        <div class="flex w-full justify-center ">
+            <ul class="w-full justify-between flex md:flex-row flex-col gap-1.5"> 
+                <li class="flex md:w-2/6 justify-center md:order-2"><a href="mailto:r.pirate94@gmail.com">Contactez le support</a></li>
+                <li class="flex md:w-2/6 w-full  justify-center  md:order-1">Create icon by <a target="_blank" href="https://icons8.com">Icons8</a></li>
+                
+                <li class="flex md:w-2/6 justify-center  md:order-3"><a href='https://www.freepik.com/vectors/restrictions'>Restrictions vector created by pch.vector - www.freepik.com</a></li>
+            </ul>
         </div>
     </footer>
 </div>
@@ -71,10 +78,15 @@
 
 <script>
 export default {
-   
+    data() {
+        return {
+            toggled: false
+        }
+    },
+    methods:{
+       showMenu(){
+           this.toggled = !this.toggled
+       }
+   }
 }
 </script>
-
-<style lang="scss">
-
-</style>
