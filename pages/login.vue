@@ -5,7 +5,6 @@
     </div>
 
 
-    <h1>Logging out</h1>
     <form action="" class="app-form"
     method="post"
     @submit.prevent="submitForm()">
