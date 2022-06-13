@@ -19,51 +19,36 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## Special Directories
+## Info
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+Projet développé sous NuxtJS version 2.15.8, framework de Vue.
+Base de donnée SQL créé grâce au systme de gestion de base MariaDB et admininistration faite grâce au logiciel HeidiSQL.
 
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+Le fichier groupomania.sql contient les rêquetes nécessaires pour la construction de la base de donnée.
+La base de donnée est nommée groupomania et comprend 4 tables : users, posts, comments et likes. Les colonnes "updatedAt" et "createdAt" sont nécessaires au fonctionement de la base de donnée.
+L'utilisateur de la database doit avoir les privilèges au mininum de : "SELECT", "DELETE", "INSERT" et "UPDATE".
 
 
-### `pages`
+## Variables d'environnement
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+Des variables d'environnement sont nécessaires pour le bon fonctionnnement du projet, ils sont situés dans un fichier .env à placer à la racine du dossier.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+ Voici la liste des variables:
+-PORT=3000
+-secretToken= (un string contenant des lettres miniscules/majuscules et des chiffres  qui sera utilisé par jsonwebtoken pour crypté les tokens d'identifications)
+-DB_HOST=localhost
+-DB_USER= (nom d'utilisateur pour base de donnée (autre que root))
+-DB_PASS= (mot de passe d'utilisateur pour base de donnée)
+-DB_DATABASE=groupomania
+-API_URL=http://localhost:3000/api
 
-### `plugins`
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+## Administration
 
-### `static`
+Plusieurs niveaux d'administrations (users.isAdmin) existent :
+- "2" : l'utilisateur ne peut pas supprimer son compte depuis le site que ce soit sur la page d'administration et la page mon compte, peut supprimer un user/ modifier son rang d'admin. N'apparait pas dans la liste des users sur la page d'admin.
+- "1" : Peut donner le rang d'admin "1" à un autre user. Peut supprimer son propre compte ou celui d'un autre utilisateur sauf user de rang "2"
+- "0" : Rang par défaut attribuer à la création du compte. Peut supprimer son compte. N'a pas accès à la page d'administration.
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+Le rang "2" peut être attribué à un utilisateur grâce au logiciel HeidiSQL. Une reconnection de l'utilisateur sera nécessaire pour mettre à jour son rang.

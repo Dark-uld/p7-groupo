@@ -15,6 +15,8 @@
     "cookie-universal-nuxt": "^2.2.1",
     "core-js": "^3.19.3",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "link-preview-js": "^2.1.15",
     "mariadb": "^3.0.0",

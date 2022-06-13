@@ -4,14 +4,14 @@
     <header class="app-header bg-redprim">
         <div class="app-flex-row justify-between w-full">
             <nuxt-link to="/" aria-label="Vers la page d'accueil" title="Vers la page d'accueil"><img src="/images/LogoS/icon-above-font.png" class="app-logo app-rounded" alt="Logo de Groupomania"></nuxt-link>
-            <button :class="['app-but','app-but-menu','block', {'change': toggled}]" @click="showMenu" aria-label="Show Menu">
+            <button :class="['app-but','app-but-menu','block', {'change': toggled}]" @click="showMenu" aria-label="Show Menu"  title="Ouvrir/Fermer le menu">
                     <div class="app-bar1" index="-1"></div>
                     <div class="app-bar2" index="-1"></div>
                     <div class="app-bar3" index="-1"></div>
             </button>
         </div>
         <div :class="['app-navContainer',{'change': toggled}]" >
-            
+            <!-- Nav bar si utilisateur est connecté-->
             <ul v-if="$auth.loggedIn" class="app-navbar gap-1 flex md:flex-row flex-col">
                 <li>
                     <nuxt-link  class='app-navitem app-flex-row ' to="/posts" aria-label="Vers la page d'accueil" title="Vers la page d'accueil"> 
@@ -39,6 +39,8 @@
                     </nuxt-link>
                 </li>
             </ul>
+
+            <!-- Nav bar si utilisateur est déconnecté-->
             <ul v-if="!$auth.loggedIn" class="app-navbar gap-1 flex md:flex-row flex-col">
                 <li>
                     <nuxt-link  class='app-navitem app-flex-row' to="/" aria-label="Vers la page d'accueil" title="Vers la page d'accueil">

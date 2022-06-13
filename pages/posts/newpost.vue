@@ -57,7 +57,7 @@ export default {
           
         })
         .catch( (error) => {
-            console.log(error)
+            alert("Problème lors de la création du post")
         });
     }
   }

@@ -1,7 +1,7 @@
 <template>
 <div class="app-body relative">
     <div class="app-logout" z-index="50">
-        <img class="app-loading"src="/images/icons/icons8-loading-100.png"/>
+        <img class="app-loading"src="/images/icons/icons8-loading-100.png" alt="loading logo"/>
     </div>
     <h1> Bienvenue {{$auth.user.name}} <br> sur le réseau d'actualités des employés Groupomania</h1>
     <div class="app-flex-row justify-center">

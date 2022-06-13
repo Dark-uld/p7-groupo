@@ -6,7 +6,7 @@ export default (url, id) => {
 
     for(let i=0; i<contentSplitted.length; i++){
         if(contentSplitted[i].match(urlRegex)){
-            content+=`<a href="${contentSplitted[i]}" class="underline">${contentSplitted[i]}</a> `
+            content+=`<a href="${contentSplitted[i]}" class="underline"  target="_blank" rel="noopener noreferrer" >${contentSplitted[i]}</a> `
         } else {
             content+=`${contentSplitted[i]} `
         }

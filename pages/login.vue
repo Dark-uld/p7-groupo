@@ -1,7 +1,7 @@
 <template>
   <div class="app-body relative">
     <div class="app-logout" z-index="50">
-        <img class="app-loading"src="/images/icons/icons8-loading-100.png"/>
+        <img class="app-loading"src="/images/icons/icons8-loading-100.png" alt="loading logo"/>
     </div>
 
 
