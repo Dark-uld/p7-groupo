@@ -1,5 +1,6 @@
 <template>
     <div class="app-body">
+      <!-- Post -->
         <div class="app-post-container">
             <h1>{{post.title}} </h1>
             <div v-if="`${post.userid}`==`${$auth.user.decoded.id}`">
@@ -7,6 +8,7 @@
                 <button @click="deleteRecord()" class="app-but app-butCancel">Delete</button>
             </div>
             <div class="mb-5">
+                  <!-- Affichage d'une preview si url existante et valide -->
                 <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
                     <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
                         <article class="app-preview-content app-center">
@@ -29,6 +31,7 @@
             <hr/>
             <hr/>
             <div class="mb-5">
+              <!-- Envoyer du commentaire -->
                 <form action=""
                 method="post"
                 @submit.prevent="submitForm()">
@@ -55,6 +58,7 @@
 import newDate from '~/utils/newDate'
 import axios from 'axios'
 import getUrl from '~/utils/getUrl'
+import verifyContent from "~/utils/verifyContent"
 
 export default {
     head(){
@@ -81,6 +85,7 @@ export default {
     methods: {
         newDate,
         getUrl,
+        // Supprimer un post
         deleteRecord(){
             if(confirm("Êtes-vous sure?") === true){
                 this.$axios.delete('/posts/' + this.$route.params.id)
@@ -93,7 +98,11 @@ export default {
                 });
             }
         },
+         // Ajouter un commentaire
         submitForm(){
+            if(verifyContent(this.content) ) {
+                return alert("Le commentaire contient des caratères interdits : |[]{};)")
+            }
             this.$axios.post( '/comments', {
                 postid: this.$route.params.id,
                 content: this.content,

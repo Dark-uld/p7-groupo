@@ -29,6 +29,7 @@
 
 <script>
 import newDate from '~/utils/newDate'
+import verifyContent from "~/utils/verifyContent"
 export default {
  middleware: 'auth',
   data(){
@@ -40,10 +41,15 @@ export default {
     }
   },
   methods:{
+    verifyContent,
     submitForm(){
+
       if(!this.title  && this.content) return alert("Il manque un titre")
       if(this.title  && !this.content )  return alert("Il manque du contenu")
       if(!this.title && !this.content) return alert("Il manque un titre et du contenu")
+      if(verifyContent(this.content) || verifyContent(this.title) ) {
+        return alert("Le post contient des caratères interdits : |[]{};)")
+      }
 
       this.$axios.post( '/posts', {
           title: this.title,

@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="app-com" v-for="(comment,index) in comments" :key="`${comment.id}`">
+          <!-- Commentaire -->
             <div class="app-post-container">
                 <div class="app-post-head italic">
                     <div class="app-post-name">Par {{comment.User.name}}</div> 
@@ -10,6 +11,7 @@
                     {{comment.content}}
                     <div v-if="`${comment.createdAt}` != `${comment.updatedAt}`" class="text-sm"> Modifié le {{newDate(comment.updatedAt)}}</div>
                 </div> 
+                 <!-- Partie pour modifier le commentaire -->
                 <div v-if="`${comment.userid}`==`${$auth.user.decoded.id}`">
                     <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butValid" >Modifier</button>
                     <form :id="`${comment.id}`" action=""
@@ -23,7 +25,6 @@
                         <input type="submit" value="Valider" class="app-but app-butCom app-butValid " >
                         <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butCancel" >Annuler</button>
                     </form>
-                    <!-- <button>Supprimer</button> -->
                 </div>
             </div>
         </div>
@@ -33,10 +34,13 @@
 
 <script>
 import newDate from '~/utils/newDate'
+import verifyContent from '~/utils/verifyContent'
 export default {
     middleware:'auth',
     methods: {
         newDate,
+        verifyContent,
+        // Affiche ou cache le formulaire pour modifier un commentaire
         showForm(value){
             let form = document.getElementById(value);
             if(form.hasAttribute('hidden')){
@@ -45,7 +49,11 @@ export default {
                 form.setAttribute('hidden', true)
             }
         },
+        // modifier un commentaire
         modifyComment(){
+            if(verifyContent(this.content) ) {
+                return alert("Le commentaire contient des caratères interdits : |[]{};)")
+            }
             this.$axios.put( '/comments/' + event.srcElement.id , {
                 postid: this.$route.params.id,
                 content: this.content,

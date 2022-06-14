@@ -2,6 +2,7 @@
     <div class="app-flex-col gap-8 max-w-full align-center">
     
         <div class="app-post app-flex-row" v-for="(post,index) in posts"  :key="index">
+        <!-- Like -->
             <div class="app-flex-col">
                     <button  v-if="!checkLike(post.id)" @click="handleLiking(post.id, checkLike(post.id))">
                         <img class="app-like" src="/images/icons/icons8-heart-20.png" alt="Ajouter un like"  tabindex="-1"/>
@@ -11,12 +12,14 @@
                     </button>
                     <div class="ml-1">{{ postLikes(post.id) }}</div>
             </div>
+             <!-- Post-->
             <div class="app-post-container space-y-0.5">
                 <h2>{{post.title}}</h2>
                 <div class="app-post-head">
                     <div class="mr-1.5">Posté par {{post.User.name}} </div> 
                     <div>le {{newDate(post.createdAt)}}</div>
                 </div>
+                 <!-- Preview si link présent dans content -->
                 <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
                     <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
                         <article class="app-preview-content app-center">

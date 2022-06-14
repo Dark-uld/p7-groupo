@@ -30,6 +30,7 @@
 
 <script>
 import newDate from '~/utils/newDate'
+import verifyContent from "~/utils/verifyContent"
 export default {
  middleware: 'auth',
  async asyncData(context){
@@ -51,12 +52,18 @@ export default {
   },
 
   methods:{
+    verifyContent,
+    // ajoute donnée du post dans formulaire de modification du post comem valeurs initials
      fillFormData(){
       this.title = this.post.title,
       this.userid = this.post.userid,
       this.content = this.post.content
     },
+    // Modifier post
     submitForm(){
+      if(verifyContent(this.content) || verifyContent(this.title) ) {
+        return alert("Le post contient des caratères interdits : |[]{};)")
+      }
       this.$axios.put( '/posts/' + this.$route.params.id, {
           title: this.title,
           content: this.content,

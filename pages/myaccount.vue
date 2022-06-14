@@ -12,6 +12,16 @@
 </template>
 <script>
 export default {
+    head(){
+        return {
+            title:'Mon compte',
+            meta: [{
+                name: 'description',
+                content: "Les détails de votre compte Groupomania",
+                hid: 'description'
+            }]
+        }
+    },
     middleware:'auth',
     methods:{
         deleteAccount(){
