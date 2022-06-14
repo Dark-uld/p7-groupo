@@ -5,6 +5,7 @@
                 <tr>
                     <th>Com Id</th>
                     <th>Créé par</th>
+                    <th>Id du post</th>
                     <th>Contenu</th>
                     <th>Créé le</th>
                     <th>Modifié le</th>
@@ -15,6 +16,7 @@
                 <tr  v-for="(comment,index) in comments"  :key="index">
                     <td> {{comment.id}}</td>
                     <td>{{comment.User.name}}</td>
+                    <td>{{comment.postid}}</td>
                     <td><div class="app-tableContent">{{comment.content}}</div></td>
                     <td>{{newDate(comment.createdAt)}}</td>
                     <td>{{newDate(comment.updatedAt)}}</td>
