@@ -15,8 +15,7 @@ exports.signup = (req, res, next) => {
             userid: req.body.userid,
             email: req.body.email,
             password: hash,
-            name: req.body.name,
-            age: req.body.age
+            name: req.body.name
             })
             .then(result => res.status(201).json({ message: 'utilisateur créé', _id: result.id}))
             .catch(error => res.status(400).json({  error : "Email déjà existant ou données contient des caractères interdits" }));

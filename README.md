@@ -41,6 +41,8 @@ Des variables d'environnement sont nécessaires pour le bon fonctionnnement du p
 - DB_PASS= (mot de passe d'utilisateur pour base de donnée)<br />
 - DB_DATABASE=groupomania<br />
 - API_URL=http://localhost:3000/api<br />
+- DB_PORT= (port de la base de donnée)<br />
+- DB_SOCKETPATH = (location for the Unix socket file that the server uses for communication with local clients)
 
 
 

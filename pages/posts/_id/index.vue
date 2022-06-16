@@ -9,7 +9,7 @@
             </div>
             <div class="mb-5">
                   <!-- Affichage d'une preview si url existante et valide -->
-                <div v-if="post.Image || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
+                <div v-if="post.urlImage || post.urlTitle || post.urlDesc" :id="`${post.id}`" class="app-preview-link app-flex-col app-center"> 
                     <a class="app-flex-col app-center max-w-full" :href="post.url" target="_blank" rel="noopener noreferrer" aria-label="`Lien Article intitulé ${post.urlTitle}`" >
                         <article class="app-preview-content app-center">
                             <div v-if="post.urlImage">

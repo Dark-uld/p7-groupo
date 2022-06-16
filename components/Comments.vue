@@ -16,11 +16,11 @@
                     <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butValid" >Modifier</button>
                     <form :id="`${comment.id}`" action=""
                     method="put"
-                    @submit.prevent="modifyComment()"
+                    @submit.prevent="modifyComment(`comCont${comment.id}`)"
                     hidden>
                         <div>
                             <label :for="`comCont${comment.id}`">Modifier le commentaire</label>
-                            <input type="text" v-model="content" :id="`comCont${comment.id}`" value="`${comment.content}`" class="app-formCom" >
+                            <input type="text"  :id="`comCont${comment.id}`" :value="`${comment.content}`" class="app-formCom" >
                         </div>
                         <input type="submit" value="Valider" class="app-but app-butCom app-butValid " >
                         <button v-on:click="showForm(comment.id)" class="app-but app-butCom app-butCancel" >Annuler</button>
@@ -50,18 +50,20 @@ export default {
             }
         },
         // modifier un commentaire
-        modifyComment(){
+        modifyComment(value){
             if(verifyContent(this.content) ) {
+                
                 return alert("Le commentaire contient des caratères interdits : |[]{};)")
             }
+            let commentaire = document.getElementById(value);
             this.$axios.put( '/comments/' + event.srcElement.id , {
                 postid: this.$route.params.id,
-                content: this.content,
+                content: commentaire.value,
                 userid:this.$auth.user.decoded.id,
             })
             .then((response) => {
                 console.log("Commentaire Modifié")
-                this.$nuxt.refresh()
+                window.location.reload(true)
             })
             .catch( (error) => {
                 console.log(error)
@@ -80,11 +82,8 @@ export default {
     data(){
         return {
             content:null,
+            listComment:null,
         }
     },
 }
 </script>
-
-<style lang="scss">
-
-</style>
