@@ -50,8 +50,6 @@ Des variables d'environnement sont nécessaires pour le bon fonctionnnement du p
 
 
 
-
-
 ## Administration
 
 Plusieurs niveaux d'administrations (users.isAdmin) existent :<br />
