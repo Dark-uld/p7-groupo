@@ -39,10 +39,11 @@ Des variables d'environnement sont nécessaires pour le bon fonctionnnement du p
  Voici la liste des variables:<br />
 - PORT=3000<br />
 - secretToken= (un string contenant des lettres miniscules/majuscules et des chiffres  qui sera utilisé par jsonwebtoken pour crypté les tokens d'identifications)<br />
-- DB_HOST=localhost<br />
+- DB_HOST= (par défaut localhost)<br />
 - DB_USER= (nom d'utilisateur pour base de donnée (autre que root))<br />
 - DB_PASS= (mot de passe d'utilisateur pour base de donnée)<br />
 - DB_DATABASE=groupomania<br />
+- DB_DIALECT= (le dialect de la base de donnée, par défaut mariadb)<br />
 - API_URL=http://localhost:3000/api<br />
 - DB_PORT= (port de la base de donnée)<br />
 - DB_SOCKETPATH = (location for the Unix socket file that the server uses for communication with local clients)<br />
