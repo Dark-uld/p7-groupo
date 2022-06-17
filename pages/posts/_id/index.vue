@@ -3,6 +3,10 @@
       <!-- Post -->
         <div class="app-post-container">
             <h1>{{post.title}} </h1>
+            <div class="app-post-head">
+                <div class="mr-1.5">Posté par {{post.User.name}} </div> 
+                <div>le {{newDate(post.createdAt)}}</div>
+            </div>
             <div v-if="`${post.userid}`==`${$auth.user.decoded.id}`">
                 <nuxt-link  :to="`/posts/${post.id}/modifypost`"  class="app-but app-butValid">Modifier</nuxt-link>
                 <button @click="deleteRecord()" class="app-but app-butCancel">Delete</button>
