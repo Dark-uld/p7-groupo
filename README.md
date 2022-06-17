@@ -24,9 +24,12 @@ For detailed explanation on how things work, check out the [documentation](https
 Projet développé sous NuxtJS version 2.15.8, framework de Vue.<br />
 Base de donnée SQL créé grâce au systme de gestion de base MariaDB et admininistration faite grâce au logiciel HeidiSQL.
 
+
+
 Le fichier groupomania.sql contient les rêquetes nécessaires pour la construction de la base de donnée.<br />
 La base de donnée est nommée groupomania et comprend 4 tables : users, posts, comments et likes. Les colonnes "updatedAt" et "createdAt" sont nécessaires au fonctionement de la base de donnée.<br />
-L'utilisateur de la database doit avoir les privilèges au mininum de : "SELECT", "DELETE", "INSERT" et "UPDATE".
+L'utilisateur de la database doit avoir les privilèges au mininum de : "SELECT", "DELETE", "INSERT" et "UPDATE".<br />
+Les paramètres de connexion  à la base de donnée se trouve dans le fichier /servermiddleware/utils/database.js.
 
 
 ## Variables d'environnement
@@ -42,7 +45,9 @@ Des variables d'environnement sont nécessaires pour le bon fonctionnnement du p
 - DB_DATABASE=groupomania<br />
 - API_URL=http://localhost:3000/api<br />
 - DB_PORT= (port de la base de donnée)<br />
-- DB_SOCKETPATH = (location for the Unix socket file that the server uses for communication with local clients)
+- DB_SOCKETPATH = (location for the Unix socket file that the server uses for communication with local clients)<br />
+
+
 
 
 
